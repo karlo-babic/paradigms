@@ -14,7 +14,7 @@
 
 ---
 
-<div align="center">..:: Navigation ::..</div>
+<div align="center"><b>..:: Navigation ::..</b></div>
 
  [<- README](README.md)
 
