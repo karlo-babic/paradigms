@@ -2,4 +2,4 @@
 
 $\frac{n!}{k!(n-k)!}$
 
-1. [[bla]]
+1. [ovo je bla link](bla.md)
