@@ -9,9 +9,8 @@
 
 ---
 
-<div align="center"><b>..:: Navigation ::..</b></div>
 <div align="center"><b>
   <a href="0-Software.html" style="font-size:64px; text-decoration:none"> < </a>
-  <a href="contents.html" style="font-size:64px; text-decoration:none"> ^ </a>
+  <a href="Contents.html" style="font-size:64px; text-decoration:none"> ^ </a>
   <a href="2-Declarative-Computation-Model.html" style="font-size:64px; text-decoration:none"> > </a>
 </b></div>
