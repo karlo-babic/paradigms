@@ -8,7 +8,7 @@
 - To focus on the mechanisms that make every language, and not syntax of multiple languages, we will use the programming language Oz (used in the book) to explore programming concepts and paradigms.
     - Oz will be used to show general programming concepts (acquire intuition for programming concepts/techniques/paradigms), but other (more popular) languages will be used for student projects etc.
 
-Instructions for Oz installation: [0. Software](0-Software.md)
+Start with the instructions for Oz installation: [0. Software](0-Software.md)
 
 ## Literature
 - [**Concepts, Techniques, and Models of Computer Programming (2004)**](https://www.goodreads.com/book/show/772585.Concepts_Techniques_and_Models_of_Computer_Programming)
