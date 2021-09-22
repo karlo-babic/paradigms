@@ -1,7 +1,6 @@
 # Programming Paradigms and Languages
 
->“A programming language is like a natural, human language in that it favors certain metaphors, images, and ways of thinking.”
->
+>“A programming language is like a natural, human language in that it favors certain metaphors, images, and ways of thinking.”  
 >\- Mindstorms: Children, Computers, and Powerful Ideas, Seymour Papert (1980)
 
 - In this course we will closely follow the book "Concepts, Techniques, and Models of Computer Programming (2004)" (links below in Literature).
