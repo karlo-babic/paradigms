@@ -16,5 +16,5 @@
 
 <div align="center"><b>..:: Navigation ::..</b></div>
 
-[🡄 README](README.md)  
+[🡄 Intro](README.md)  
 [🡆 1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md)
