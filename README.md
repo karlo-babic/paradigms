@@ -19,9 +19,3 @@ Start with the instructions for Oz installation: [0. Software](0-Software.md)
 - [Code Complete: A Practical Handbook of Software Construction (1993)](https://www.goodreads.com/book/show/4845.Code_Complete)
 
 <img src="https://www.info.ucl.ac.be/~pvr/paradigmsDIAGRAMeng108.jpg">
-
-
-
-<div id="spaceship" style="position:absolute;z-index:1024;top:111px;right:42px;"><img onclick="notxbot_start()" src="ship_off.png" width="20"></div>
-
-<script src="spaceship.js"></script>
