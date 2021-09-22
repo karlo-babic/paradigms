@@ -11,5 +11,5 @@
 
 <div align="center"><b>..:: Navigation ::..</b></div>
 
- [<- 0. Software](0-Software.md)  
- [-> 2. Declarative Computation Model](2-Declarative-Computation-Model.md)
+ [🡄 0. Software](0-Software.md)  
+ [🡆 2. Declarative Computation Model](2-Declarative-Computation-Model.md)
