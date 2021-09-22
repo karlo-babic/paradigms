@@ -14,4 +14,5 @@
 [🡄 0. Software](0-Software.md)  
 [🡆 2. Declarative Computation Model](2-Declarative-Computation-Model.md)
 
-<div align="center"><b><a href="0-Software.html">🡄</a> <a href="README.html">🡅</a> 🡆</b></div>
+<div align="center"><b><a href="0-Software.html" style="font-size: 200px;">
+<</a> <a href="content.html">^</a> <a href="2-Declarative-Computation-Model.html">></a></b></div>
