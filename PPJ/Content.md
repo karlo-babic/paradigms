@@ -2,4 +2,6 @@
 
 $\frac{n!}{k!(n-k)!}$
 
+<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+
 1. [ovo je bla link](bla.md)
