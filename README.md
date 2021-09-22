@@ -18,4 +18,4 @@ Start with the instructions for Oz installation: [0. Software](0-Software.md)
     - [Contents](http://www.springer.com/cda/content/document/cda_downloaddocument/9781848829138-t1.pdf)
 - [Code Complete: A Practical Handbook of Software Construction (1993)](https://www.goodreads.com/book/show/4845.Code_Complete)
 
-<img src="https://www.info.ucl.ac.be/~pvr/paradigmsDIAGRAMeng108.jpg"></img>
+<img src="https://www.info.ucl.ac.be/~pvr/paradigmsDIAGRAMeng108.jpg">
