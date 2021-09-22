@@ -12,7 +12,9 @@
 ## Visual Studio (optional)
 - If you would rather program with Oz in [Visual studio](https://code.visualstudio.com/), that is possible with the [Oz Mozart extension](https://marketplace.visualstudio.com/items?itemName=mozart-oz.vscode-oz)
 
+---
 
-<br/><br/>
-[<div style="position:absolute; left:8; display:inline-block;">🡄 README</div>](README.md)
-[<div style="position:absolute; right:8; display:inline-block;">🡆 1. Introduction to Programming Concepts</div>](1-Introduction-to-Programming-Concepts.md)
+<div align="center"><b>..:: Navigation ::..</b></div>
+
+[🡄 README](README.md)  
+[🡆 1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md)

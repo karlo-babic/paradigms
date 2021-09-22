@@ -5,6 +5,5 @@
 
 <div align="center"><b>..:: Navigation ::..</b></div>
 
- [<- 1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md))
- 
+ [<- 1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md))  
  [-> ]()
