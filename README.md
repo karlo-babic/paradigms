@@ -1,8 +1,21 @@
 # Programming Paradigms and Languages
 
+>“A programming language is like a natural, human language in that it favors certain metaphors, images, and ways of thinking.”
+>
+>\- Mindstorms: Children, Computers, and Powerful Ideas, Seymour Papert (1980)
 
+- In this course we will closely follow the book "Concepts, Techniques, and Models of Computer Programming (2004)" (links below in Literature).
+- Instead of treating each paradigm as seperate, and focusing on specific languages, we will learn the underlaying programming concepts. Those concepts are than used to define all the existing paradigms as genes define each animal species.
+- To focus on the mechanisms that make every language, and not syntax of multiple languages, we will use the programming language Oz (used in the book) to explore programming concepts and paradigms.
+    - Oz will be used to show general programming concepts (acquire intuition for programming concepts/techniques/paradigms), but other (more popular) languages will be used for student projects etc.
 
-Start with [1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md).
+Instructions for Oz installation: [0. Software](0-Software.md)
+
+<div align="center">..:: Navigation ::..</div>
+
+-> [1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md)
+
+----
 
 ## Literature
 - [**Concepts, Techniques, and Models of Computer Programming (2004)**](https://www.goodreads.com/book/show/772585.Concepts_Techniques_and_Models_of_Computer_Programming)
