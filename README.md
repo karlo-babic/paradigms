@@ -23,6 +23,6 @@ Start with the instructions for Oz installation: [Software](Software.md)
 ---
 
 <div align="center"><b>
-  <a href="contents.html" style="font-size:64px; text-decoration:none"> ^ </a>
+  <a href="Contents.html" style="font-size:64px; text-decoration:none"> ^ </a>
   <a href="Software.html" style="font-size:64px; text-decoration:none"> > </a>
 </b></div>
