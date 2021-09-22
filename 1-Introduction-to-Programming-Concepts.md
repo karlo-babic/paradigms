@@ -9,7 +9,7 @@
 
 ---
 
-<div align="center">..:: Navigation ::..</div>
+**<div align="center">..:: Navigation ::..</div>**
 
  [<- 0. Software](0-Software.md)
  
