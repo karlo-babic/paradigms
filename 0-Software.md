@@ -1,4 +1,4 @@
-# Software
+# 0. Software
 
 ## Installation
 - Mozart Programming System is the primary implementation of Oz, [official website](http://mozart2.org/)
@@ -11,3 +11,9 @@
 
 ## Visual Studio (optional)
 - If you would rather program with Oz in [Visual studio](https://code.visualstudio.com/), that is possible with the [Oz Mozart extension](https://marketplace.visualstudio.com/items?itemName=mozart-oz.vscode-oz)
+
+---
+
+<div align="center">..:: Navigation ::..</div>
+
+ [-> 1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md)

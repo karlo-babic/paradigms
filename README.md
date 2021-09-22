@@ -11,12 +11,6 @@
 
 Instructions for Oz installation: [0. Software](0-Software.md)
 
-<div align="center">..:: Navigation ::..</div>
-
--> [1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md)
-
-----
-
 ## Literature
 - [**Concepts, Techniques, and Models of Computer Programming (2004)**](https://www.goodreads.com/book/show/772585.Concepts_Techniques_and_Models_of_Computer_Programming)
     - [Contents](https://mitpress.ublish.com/ereader/39/?preview#page/v)
