@@ -5,17 +5,25 @@
 >\- Euclid's reply to Ptolemy, Euclid (c. 300 BC)  
 >\- The Wonderful Wizard of Oz, L. Frank Baum (1856–1919)
 
-- In this chapter you will get introduced to the most important concepts in programming.
+- In this chapter, you will get introduced to the most important concepts in programming.
     - Later chapters will give a deeper understanding of these concepts (and add other concepts).
 
 ## 1. Calculator
 - In Mozart, type: `{Browse 9999*9999}`
     - *The curly braces are used for a procedure or function call.*
     - *Browse is a procedure that displays the one argument in the browser window.*
-- To compile that line, press `ctrl-. ctrl-l`
+- To compile that line, press: `ctrl-. ctrl-l`
 - Result: `99980001`
 
 ## 2. Variables
+- Declare a variable:
+    ```
+    declare
+    V = 9999 * 9999
+    {Browse V*V}
+    ```
+    - *Variables are short-cuts for values*
+- Result: `9996000599960001`
 
 ---
 
