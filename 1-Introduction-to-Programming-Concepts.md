@@ -29,7 +29,7 @@ V = 9999 * 9999
 - Result: `9996000599960001`
 
 ## 3. Functions
-
+- Factorial function: <img src="https://render.githubusercontent.com/render/math?math=\large n! = 1*2*...*(n-1)*n">
 
 ---
 
