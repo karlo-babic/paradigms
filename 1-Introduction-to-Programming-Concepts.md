@@ -29,10 +29,12 @@ V = 9999 * 9999
 - Result: `9996000599960001`
 
 ## 3. Functions
+
+### Factorial
 - Factorial: <img src="https://render.githubusercontent.com/render/math?math=\large n! = 1*2*...*(n-1)*n">
 - Factorial of 10: `{Browse 1*2*3*4*5*6*7*8*9*10}`
 - Result: `3628800`
-- Define a function:
+- Define a function (press `ctrl-. ctrl-b` to compile the whole buffer):
 ```
 declare
 fun {Fact N}
@@ -53,6 +55,8 @@ end
 - Result: `3628800`
 - `{Browse {Fact 10}}`
 - Result: `933 26215 44394 41526 81699 23885 62667 00490 71596 82643 81621 46859 29638 95217 59999 32299 15608 94146 39761 56518 28625 36979 20827 22375 82511 85210 91686 40000 00000 00000 00000 00000`
+
+### Combinations
 
 ---
 
