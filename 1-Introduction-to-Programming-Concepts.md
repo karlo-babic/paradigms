@@ -48,7 +48,7 @@ end
 - Info:
     - The function body contains the **if expression** instruction.
     - **Recursion**: function is calling itself.
-    - Fact recursive mathematical definition:
+    - Fact mathematical recursive definition:
         - <img src="https://render.githubusercontent.com/render/math?math=\large 0! = 1">
         - <img src="https://render.githubusercontent.com/render/math?math=\large n! = n*(n-1)! \quad if \quad n>0">
 - Call the function *{Fact 10}* inside of the Browse procedure to display the result: `{Browse {Fact 10}}`
