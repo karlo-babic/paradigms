@@ -10,6 +10,7 @@
 
 ## 1. Calculator
 - In Mozart, type: `{Browse 9999*9999}`
+- Info:
     - *The curly braces are used for a procedure or function call.*
     - *Browse is a procedure that displays the one argument in the browser window.*
 - To compile that line, press: `ctrl-. ctrl-l`
@@ -17,13 +18,18 @@
 
 ## 2. Variables
 - Declare a variable:
-    ```
-    declare
-    V = 9999 * 9999
-    {Browse V*V}
-    ```
-    - *Variables are short-cuts for values*
+```
+declare
+V = 9999 * 9999
+{Browse V*V}
+```
+- Info:
+    - *Variables are short-cuts for values, they cannot be assigned more than once. You CAN declare another variable with the same name.*
+    - *The declare statement creates a new store variable and makes the variable identifier refer to it.*
 - Result: `9996000599960001`
+
+## 3. Functions
+
 
 ---
 
