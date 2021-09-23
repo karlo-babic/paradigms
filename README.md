@@ -1,6 +1,6 @@
 # Programming Paradigms and Languages
 
->“A programming language is like a natural, human language in that it favors certain metaphors, images, and ways of thinking.”  
+>"A programming language is like a natural, human language in that it favors certain metaphors, images, and ways of thinking."  
 >\- Mindstorms: Children, Computers, and Powerful Ideas, Seymour Papert (1980)
 
 - In this course, we will closely follow the book "Concepts, Techniques, and Models of Computer Programming (2004)" (links below in Literature).
@@ -13,7 +13,8 @@
     - Oz is a multiparadigm programming language (supports many different paradigms).
 
 Overview of the course: [Contents](Contents.md)  
-Start with the instructions for Oz installation: [Software](Software.md)
+Start with the instructions for Oz installation: [Software](Software.md)  
+After the software setup, continue with [1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md)
 
 ## Literature
 - [**Concepts, Techniques, and Models of Computer Programming (2004)**](https://www.goodreads.com/book/show/772585.Concepts_Techniques_and_Models_of_Computer_Programming)
