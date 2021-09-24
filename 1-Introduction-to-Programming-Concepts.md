@@ -31,7 +31,7 @@ V = 9999 * 9999
 ## 3. Functions
 
 ### Factorial
-- Factorial: <img src="https://render.githubusercontent.com/render/math?math=\large n! = 1*2*...*(n-1)*n">
+- Factorial definition: <img src="https://render.githubusercontent.com/render/math?math=\large n! = 1*2*...*(n-1)*n">
 - Factorial of 10: `{Browse 1*2*3*4*5*6*7*8*9*10}`
 - Result: `3628800`
 - Define a function (press `ctrl-. ctrl-b` to compile the whole buffer):
@@ -53,10 +53,84 @@ end
         - <img src="https://render.githubusercontent.com/render/math?math=\large n! = n*(n-1)! \quad if \quad n>0">
 - Call the function *{Fact 10}* inside of the Browse procedure to display the result: `{Browse {Fact 10}}`
 - Result: `3628800`
-- `{Browse {Fact 10}}`
+- `{Browse {Fact 100}}`
 - Result: `933 26215 44394 41526 81699 23885 62667 00490 71596 82643 81621 46859 29638 95217 59999 32299 15608 94146 39761 56518 28625 36979 20827 22375 82511 85210 91686 40000 00000 00000 00000 00000`
 
 ### Combinations
+- Combination definition: <img src="https://render.githubusercontent.com/render/math?math=\large \binom{n}{r} = \frac{n!}{r!(n-r)!}">
+- Combination defined in Oz:
+```
+declare
+fun {Comb N R}
+    {Fact N} div ({Fact R}*{Fact N-R})
+end
+```
+- Info:
+    - **Functional abstraction**: using existing functions to define a new function.
+- `{Comb 10 3}`
+- Result: `120`
+
+## 4. Lists
+- List is a sequence of elements: `{Browse [5 6 7 8]}`
+- *[5 6 7 8]* is a short-cut.
+    - A list is a chain of links, and each link contains two things: a list element and a reference to the rest of the chain.
+    - *[6 7]* is linked as follows: *6 -> 7 -> nil*, where *nil* is the  empty list.
+        - In Oz: `Z=nil  Y=7|Z  X=6|Y`
+        - Now *X* references the list *[6 7]*.
+- *H|T* is a list pair (often called a [cons](https://en.wikipedia.org/wiki/Cons))
+- Example:
+```
+declare
+H = 5
+T = [6 7 8]
+{Browse H|T}
+```
+- Result: `[5 6 7 8]`
+- Info:
+    - H|T = 5 | [6 7 8]
+    - Head: *5*
+    - Tail: *[5 6 7 8]*
+- Get back the head and tail:
+```
+declare
+L = [5 6 7 8]
+{Browse L.1}
+{Browse L.2}
+```
+- Result:
+```
+5
+[6 7 8]
+```
+
+### Pattern matching
+```
+declare
+L = [5 6 7 8]
+case L of H|T then
+    {Browse H} {Browse T}
+end
+```
+- Result is the same as the last: *5* and *[6 7 8]*.
+- Info:
+    - Case instruction declares two local variables: *H* and *T*.
+    - Case decomposes L according to the pattern *H|T*.
+
+## 5. Functions over lists
+- Pascal's triangle:
+```
+   1
+  1 1
+ 1 2 1
+1 3 3 1
+```
+- We will define a function, *{Pascal N}*, which calculates the nth row of Pascal's triangle.
+- Calculating the fifth row from the fourth:
+    - Fourth row: *[1 3 3 1]*
+    - Shift the fourth row left and right (by adding a zero to the right and left), and sum them.
+        - *[1 3 3 1 0] + [0 1 3 3 1] = [1 4 6 4 1]*, which is the fifth row.
+
+### The main function
 
 ---
 
