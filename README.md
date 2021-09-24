@@ -12,9 +12,9 @@
     - Oz will be used to show general programming concepts (acquire intuition for programming concepts/techniques/paradigms), but other (more popular) languages will be used for student projects, etc.
     - Oz is a multiparadigm programming language (supports many different paradigms).
 
-Overview of the course: [Contents](Contents.md)  
-Start with the instructions for Oz installation: [Software](Software.md)  
-After the software setup, continue with [1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md)
+Overview of the course: [Contents](Contents.md).  
+Start with the instructions for Oz installation: [Software](Software.md).  
+After the software setup, continue with [1. Introduction to Programming Concepts](1-Introduction-to-Programming-Concepts.md).
 
 ## Literature
 - [**Concepts, Techniques, and Models of Computer Programming (2004)**](https://www.goodreads.com/book/show/772585.Concepts_Techniques_and_Models_of_Computer_Programming)
@@ -25,6 +25,8 @@ After the software setup, continue with [1. Introduction to Programming Concepts
 - [Code Complete: A Practical Handbook of Software Construction (1993)](https://www.goodreads.com/book/show/4845.Code_Complete)
 
 <img src="https://www.info.ucl.ac.be/~pvr/paradigmsDIAGRAMeng108.jpg">
+
+$f(x) = x^2$
 
 ---
 
