@@ -26,8 +26,6 @@ After the software setup, continue with [1. Introduction to Programming Concepts
 
 <img src="https://www.info.ucl.ac.be/~pvr/paradigmsDIAGRAMeng108.jpg">
 
-$f(x) = x^2$
-
 ---
 
 <div align="center"><b>
