@@ -10,14 +10,14 @@
 
 ## 1. Calculator
 - In Mozart, type: `{Browse 9999*9999}`
+    - To compile that line, press: `ctrl-. ctrl-l`
+- Result: `99980001`
 - Info:
     - The curly braces are used for a procedure or function call.
     - Browse is a procedure that displays the one argument in the browser window.
-- To compile that line, press: `ctrl-. ctrl-l`
-- Result: `99980001`
 
 ## 2. Variables
-- Declare a variable:
+- Declare a variable (press `ctrl-. ctrl-b` to compile the whole buffer):
 ```
 declare
 V = 9999 * 9999
@@ -28,13 +28,25 @@ V = 9999 * 9999
     - The declare statement creates a new **store variable** and makes the **variable identifier** refer to it.
 - Result: `9996000599960001`
 
+## Excercise
+1. Calculate 2^100 without typing 2\*2\*2... with one hundred twos.
+    <details>
+        <summary>Hint</summary>
+        Use variables to store intermediate results.
+    </detalis>
+2. Calculate 100! without typing 1\*2\*3... until 100. Can it be done?
+    <details>
+        <summary>Hint</summary>
+        It can't be done (that simply).
+    </detalis>
+
 ## 3. Functions
 
 ### Factorial
 - Factorial definition: <img src="https://render.githubusercontent.com/render/math?math=\large n! = 1*2*...*(n-1)*n">
 - Factorial of 10: `{Browse 1*2*3*4*5*6*7*8*9*10}`
 - Result: `3628800`
-- Define a function (press `ctrl-. ctrl-b` to compile the whole buffer):
+- Define a function:
 ```
 declare
 fun {Fact N}
@@ -130,7 +142,41 @@ end
     - Shift the fourth row left and right (by adding a zero to the right and left), and sum them.
         - *[1 3 3 1 0] + [0 1 3 3 1] = [1 4 6 4 1]*, which is the fifth row.
 
-### The main function
+### Pascal's triangle in Oz:
+```
+declare Pascal AddList ShiftLeft ShiftRight
+
+fun {Pascal N}
+    if N==1 then [1]
+    else
+        {AddList {ShiftLeft {Pascal N-1}}
+                 {ShiftRight {Pascal N-1}}}
+    end
+end
+
+fun {ShiftLeft L}
+    case L of H|T then
+        H|{ShiftLeft T}
+    else [0] end
+end
+
+fun {ShiftRight L} 0|L end
+
+fun {AddList L1 L2}
+    case L1 of H1|T1 then
+        case L2 of H2|T2 then
+            H1+H2|{AddList T1 T2}
+        end
+    else nil
+    end
+end
+```
+- Info:
+    - Top-down software development: first writing the main function and filling in the blanks afterwards.
+- Execute: `Pascal 20`
+- Result: `[1 19 171 969 3876 11628 27132 50388 75582 92378 92378 75582 50388 27132 11628 3876 969 171 19 1]`
+
+## 6. Correctness
 
 ---
 
