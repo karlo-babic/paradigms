@@ -1,6 +1,5 @@
 name: Paradigms
 title: null
-markdown: GFM
 
 kramdown:
   # Use GitHub flavored markdown, including triple backtick fenced code blocks
