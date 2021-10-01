@@ -28,7 +28,7 @@ V = 9999 * 9999
     - The declare statement creates a new **store variable** and makes the **variable identifier** refer to it.
 - Result: `9996000599960001`
 
-## Excercise
+### Excercise
 1. Calculate 2^100 without typing 2\*2\*2... with one hundred twos.
     <details>
         <summary>Hint</summary>
@@ -47,7 +47,7 @@ V = 9999 * 9999
 - Factorial of 10: `{Browse 1*2*3*4*5*6*7*8*9*10}`
 - Result: `3628800`
 - Define a function:
-```oz
+```
 declare
 fun {Fact N}
     if N==0 then
@@ -91,7 +91,7 @@ end
         - Now *X* references the list *[6 7]*.
 - *H|T* is a list pair (often called a [cons](https://en.wikipedia.org/wiki/Cons))
 - Example:
-```oz
+```
 declare
 H = 5
 T = [6 7 8]
@@ -143,7 +143,7 @@ end
         - *[1 3 3 1 0] + [0 1 3 3 1] = [1 4 6 4 1]*, which is the fifth row.
 
 ### Pascal's triangle in Oz:
-```oz
+```
 declare Pascal AddList ShiftLeft ShiftRight
 
 fun {Pascal N}
@@ -176,7 +176,120 @@ end
 - Execute: `{Pascal 20}`
 - Result: `[1 19 171 969 3876 11628 27132 50388 75582 92378 92378 75582 50388 27132 11628 3876 969 171 19 1]`
 
-## 6. Correctness
+## 6. Complexity
+- The Pascal function defined above gets very slow with larger numbers.
+```
+fun {Pascal N}
+    if N==1 then [1]
+    else
+        {AddList {ShiftLeft {Pascal N-1}}
+                 {ShiftRight {Pascal N-1}}}
+    end
+end
+```
+- Why?
+    <details>
+        <summary>Answer</summary>
+        Calling {Pascal N} will call {Pascal N-1} two times.<br/>
+        Calling {Pascal 30} will call {Pascal 1} 2^29 times, which is about half a billion.
+    </detalis>
+- FastPascal function definition:
+```
+fun {FastPascal N}
+    if N==1 then [1]
+    else L in
+        L = {FastPascal N-1}
+        {AddList {ShiftLeft L} {ShiftRight L}}
+    end
+end
+```
+- Info:
+    - Local variable is declared with `L in`: that is just like using declare, except the variable exists only between the **else** and the **end**.
+- Time complexity:
+    - The execution time of a program as a function of input size.
+    - Time complexity of {Pascal N} and {FastPascal N}?
+    <details>
+        <summary>Answer</summary>
+        {Pascal N}: ~2^n<br/>
+        {FastPascal N}: ~n^2
+    </detalis>
+
+## 7. Lazy evaluation
+- Up until now everything we did was with **eager evaluation**, functions did their calculations as soon as they were called.
+- **Lazy evaluation**: a calculation is done only when the result is needed.
+- Example function that calculates a list of integers, from N to infinity:
+```
+fun lazy {Ints N}
+    N | {Ints N+1}
+end
+```
+- Info:
+    - {Ints 0} calculates the infinite list 0|1|2|3|4|... which looks like an infinite loop.
+    - Lazy evaluation ensures that the function will calculate only what is needed.
+    - {Ints 0} will display nothing, as nothing yet needed to be calculated.
+    - {Ints 0}.1 will display *0* as that is the head (the first element) of the list.
+- `case {Ints 0} of A|B|C|_ then {Browse A+B+C} end` displays `3`.
+
+### Excercise
+1. Define a function that calculates the sum of a list of integers:
+```
+fun {SumList L}
+    case L of X|L1 then X+{SumList L1}
+    else 0 end
+end
+```
+- What happens if we call {SumList {Ints 0}}? Is this a good idea?
+    <details>
+        <summary>Hint</summary>
+        Sum needs each of the elements in the list.
+    </detalis>
+
+### Lazy calculation of Pascal's triangle
+```
+fun lazy {PascalList Row}
+    Row | { PascalList
+                {AddList {ShiftLeft Row}
+                         {ShiftRight Row}} }
+end
+```
+```
+declare
+L = {PascalList [1]}
+```
+- Try:
+    - `{Browse L}`
+    - `{Browse L.1}`
+    - `{Browse L.2.1}`
+
+### Excercise
+1. Instead of writing a lazy function, we can write a function that direcly calculates *N* rows starting from an initial *Row*:
+```
+fun {PascalList2 N Row}
+    if N==1 then
+        [Row]
+    else
+        Row | {PascalList2 N-1
+                   {AddList {ShiftLeft Row}
+                            {ShiftRight Row}}}
+    end
+end
+```
+- Why is the lazy version better? Think of an example in which the lazy version is the more optimal solution.
+    <details>
+        <summary>Example</summary>
+        {Browse {PascalList2 10 [1]}} would display the first 10 rows of the Pascal's triangle.<br/>
+        What if we call the function again, but this time we want the first 11 rows? How is the lazy version more optimal?
+    </detalis>
+    <details>
+        <summary>Hint</summary>
+        Lazy evaluation does not calculate twice, it can continue where it left off.
+    </detalis>
+
+## 8. Higher-order programming
+
+## 9. Concurrency
+
+## ...
 
 ---
 
