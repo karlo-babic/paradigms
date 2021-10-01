@@ -49,7 +49,7 @@ V = 9999 * 9999
 - Factorial of 10: `{Browse 1*2*3*4*5*6*7*8*9*10}`
 - Result: `3628800`
 - Define a function:
-```
+```oz
 declare
 fun {Fact N}
     if N==0 then
@@ -93,7 +93,7 @@ end
         - Now *X* references the list *[6 7]*.
 - *H|T* is a list pair (often called a [cons](https://en.wikipedia.org/wiki/Cons))
 - Example:
-```
+```oz
 declare
 H = 5
 T = [6 7 8]
@@ -145,7 +145,7 @@ end
         - *[1 3 3 1 0] + [0 1 3 3 1] = [1 4 6 4 1]*, which is the fifth row.
 
 ### Pascal's triangle in Oz:
-```
+```oz
 declare Pascal AddList ShiftLeft ShiftRight
 
 fun {Pascal N}
