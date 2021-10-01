@@ -277,7 +277,7 @@ end
 - Why is the lazy version better? Think of an example in which the lazy version is the more optimal solution.
     <details>
         <summary>Hint1</summary>
-        {Browse {PascalList2 10 [1]}} would display the first 10 rows of the Pascal's triangle.<br/>
+        <code>{Browse {PascalList2 10 [1]}}</code> would display the first 10 rows of the Pascal's triangle.<br/>
         What if we call the function again, but this time we want the first 11 rows? How is the lazy version more optimal?
         <details>
             <summary>Hint2</summary>
