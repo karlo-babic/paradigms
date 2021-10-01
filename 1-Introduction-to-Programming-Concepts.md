@@ -18,7 +18,7 @@
 
 ## 2. Variables
 - Declare a variable (press `ctrl-. ctrl-b` to compile the whole buffer):
-```
+```oz
 declare
 V = 9999 * 9999
 {Browse V*V}
@@ -173,7 +173,7 @@ end
 ```
 - Info:
     - Top-down software development: first writing the main function and filling in the blanks afterwards.
-- Execute: `Pascal 20`
+- Execute: `{Pascal 20}`
 - Result: `[1 19 171 969 3876 11628 27132 50388 75582 92378 92378 75582 50388 27132 11628 3876 969 171 19 1]`
 
 ## 6. Correctness
