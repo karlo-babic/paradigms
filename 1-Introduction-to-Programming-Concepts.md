@@ -28,13 +28,15 @@ V = 9999 * 9999
     - The declare statement creates a new **store variable** and makes the **variable identifier** refer to it.
 - Result: `9996000599960001`
 
-### Excercise
-1. Calculate 2^100 without typing 2\*2\*2... with one hundred twos.
+#### Excercise 1
+- Calculate 2^100 without typing 2\*2\*2... with one hundred twos.
     <details>
         <summary>Hint</summary>
         Use variables to store intermediate results.
     </detalis>
-2. Calculate 100! without typing 1\*2\*3... until 100. Can it be done?
+
+#### Excercise 2
+- Calculate 100! without typing 1\*2\*3... until 100. Can it be done?
     <details>
         <summary>Hint</summary>
         It can't be done (that simply).
@@ -230,8 +232,8 @@ end
     - {Ints 0}.1 will display *0* as that is the head (the first element) of the list.
 - `case {Ints 0} of A|B|C|_ then {Browse A+B+C} end` displays `3`.
 
-### Excercise
-1. Define a function that calculates the sum of a list of integers:
+#### Excercise 3
+- Define a function that calculates the sum of a list of integers:
 ```
 fun {SumList L}
     case L of X|L1 then X+{SumList L1}
@@ -261,8 +263,8 @@ L = {PascalList [1]}
     - `{Browse L.1}`
     - `{Browse L.2.1}`
 
-### Excercise
-1. Instead of writing a lazy function, we can write a function that direcly calculates *N* rows starting from an initial *Row*:
+#### Excercise 4
+- Instead of writing a lazy function, we can write a function that direcly calculates *N* rows starting from an initial *Row*:
 ```
 fun {PascalList2 N Row}
     if N==1 then
