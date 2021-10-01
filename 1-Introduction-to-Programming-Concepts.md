@@ -17,7 +17,7 @@
     - Browse is a procedure that displays the one argument in the browser window.
 
 ## 2. Variables
-- Declare a variable (press `ctrl-. ctrl-b` to compile the whole buffer):
+- Declare a variable (press `ctrl-. ctrl-b` to compile the whole buffer): test
 ```oz
 declare
 V = 9999 * 9999
