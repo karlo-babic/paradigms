@@ -1,3 +1,5 @@
+<link href="{{ site.baseurl }}/syntax.css" rel="stylesheet">
+
 # 1. Introduction to Programming Concepts
 
 >"There is no royal road to geometry."  
