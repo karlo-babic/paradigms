@@ -18,7 +18,7 @@
 
 ## 2. Variables
 - Declare a variable (press `ctrl-. ctrl-b` to compile the whole buffer):
-```oz
+```python
 declare
 V = 9999 * 9999
 {Browse V*V}
