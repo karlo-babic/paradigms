@@ -280,7 +280,7 @@ end
         {Browse {PascalList2 10 [1]}} would display the first 10 rows of the Pascal's triangle.<br/>
         What if we call the function again, but this time we want the first 11 rows? How is the lazy version more optimal?
     </detalis>
-    
+    <br>
     <details>
         <summary>Hint</summary>
         Lazy evaluation does not calculate twice, it can continue where it left off.
