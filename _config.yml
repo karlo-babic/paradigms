@@ -1,7 +1,4 @@
 name: Paradigms
 title: null
-
-markdown: kramdown
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
+markdown: GFM
+syntax_highlighter: rouge
