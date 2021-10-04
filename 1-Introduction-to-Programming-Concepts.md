@@ -264,7 +264,7 @@ L = {PascalList [1]}
     - `{Browse L.2.1}`
 
 #### Excercise 4
-- Instead of writing a lazy function, we can write a function that direcly calculates *N* rows starting from an initial *Row*:
+- Instead of writing a lazy function, we can write a function that directly calculates *N* rows starting from an initial *Row*:
 ```
 fun {PascalList2 N Row}
     if N==1 then
