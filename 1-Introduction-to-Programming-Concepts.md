@@ -18,7 +18,7 @@
 
 ## 2. Variables
 - Declare a variable (press `ctrl-. ctrl-b` to compile the whole buffer):
-```oz
+```
 declare
 V = 9999 * 9999
 {Browse V*V}
@@ -103,7 +103,7 @@ T = [6 7 8]
 - Info:
     - H|T = 5 | [6 7 8]
     - Head: *5*
-    - Tail: *[5 6 7 8]*
+    - Tail: *[6 7 8]*
 - Get back the head and tail:
 ```
 declare
