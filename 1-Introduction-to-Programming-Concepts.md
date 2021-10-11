@@ -316,11 +316,6 @@ end
         <summary>Hint</summary>
         Function Add should perform addition of the two numbers passed as arguments.
     </detalis>
-- Define the function *FastPascal* using *GenericPascal*.
-    <details>
-        <summary>Hint</summary>
-        {GenericPascal Add N} is equivalent to {FastPascal N}.
-    </detalis>
 - Define the function *Xor* that does an exclusive-or operation, and try using it in *{GenericPascal Xor N}*.
     <details>
         <summary>Hint</summary>
