@@ -572,10 +572,10 @@ end
 ```
 - What is the content of C after this program executes? 
     <details>
-        <summary>Hint</summary>
+        <summary>Hint1</summary>
         Thread execution is interleaved.
         <details>
-            <summary>Answer</summary>
+            <summary>Hint2</summary>
             <img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/interleaving.png">
         </detalis>
     </detalis>
