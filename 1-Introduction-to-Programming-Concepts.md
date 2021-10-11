@@ -28,14 +28,14 @@ V = 9999 * 9999
     - The declare statement creates a new **store variable** and makes the **variable identifier** refer to it.
 - Result: `9996000599960001`
 
-#### Excercise 1
+#### Exercise 1
 - Calculate 2^100 without typing 2\*2\*2... with one hundred twos.
     <details>
         <summary>Hint</summary>
         Use variables to store intermediate results.
     </detalis>
 
-#### Excercise 2
+#### Exercise 2
 - Calculate 100! without typing 1\*2\*3... until 100. Can it be done?
     <details>
         <summary>Hint</summary>
@@ -232,7 +232,7 @@ end
     - {Ints 0}.1 will display *0* as that is the head (the first element) of the list.
 - `case {Ints 0} of A|B|C|_ then {Browse A+B+C} end` displays `3`.
 
-#### Excercise 3
+#### Exercise 3
 - Define a function that calculates the sum of a list of integers:
 ```
 fun {SumList L}
@@ -263,7 +263,7 @@ L = {PascalList [1]}
     - `{Browse L.1}`
     - `{Browse L.2.1}`
 
-#### Excercise 4
+#### Exercise 4
 - Instead of writing a lazy function, we can write a function that directly calculates *N* rows starting from an initial *Row*:
 ```
 fun {PascalList2 N Row}
@@ -310,7 +310,7 @@ end
     - The ability to pass functions as arguments is known as **higher-order programming**.
     - We are using the old versions of *ShiftLeft* and *ShiftRight*, *AddList* is replaced with *OpList*.
 
-#### Excercise 5
+#### Exercise 5
 - Define the function *Add* such that when used in *{GenericPascal Add N}* you get the same result as with the original Pascal function.
     <details>
         <summary>Hint</summary>
@@ -459,7 +459,7 @@ fun {Add A B}
 end
 ```
 
-#### Excercise 6
+#### Exercise 6
 - Define two functons, *Bump* and *Read*:
     - *Bump* adds one to the counter (to a memory cell) and returns the current value of that cell,
     - *Read* returns the current value of the memory cell.
@@ -487,13 +487,13 @@ end
     - Correct it.
 
 ## 12. Objects
-- In the previous excercise you implemented functions *Bump* and *Read* that update and read a memory cell.
-    - You actually implemented an object, which can be improved (in the next excercise).
+- In the previous exercise you implemented functions *Bump* and *Read* that update and read a memory cell.
+    - You actually implemented an object, which can be improved (in the next exercise).
 - The *Bump/Read* object writes and reads from a memory cell. That memory cell can be accessed from anywhere in the program (which is not secure).
 - To make that object better, we can isolate the memory cell so it can be accessed only from the inside of the object.
     - This property is called **encapsulation**.
 
-#### Excercise 7
+#### Exercise 7
 - Improve the *Bump/Read* object implementation by referencing the memory cell *C* with a local variable:
 ```
 declare
