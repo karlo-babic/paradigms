@@ -524,6 +524,240 @@ end
 ```
 - This version has the same time complexity as the previous version, but it uses less memory because it does not create the two split lists.
 
+### Queues
+- A queue is a sequence of elements with an *insert* and a *delete* operation.
+    - The insert operation adds an element to one end of the queue and the delete operation removes an element from the other end.
+    - Queues have FIFO (First-In-First-Out) behavior.
+
+#### A naive queue
+- If a list L represents the queue content, then inserting X gives the new queue X|L and deleting X is done by calling {ButLast L X L1} (which binds X to the deleted element and returns the new queue in L1):
+```
+proc {ButLast L ?X ?L1}
+    case L
+    of [Y] then X=Y L1=nil
+    [] Y|L2 then L3 in
+        L1 = Y|L3
+        {ButLast L2 X L3}
+    end
+end
+```
+- ButLast is slow: it takes time proportional to the number of elements in the queue.
+
+#### Amortized constant-time ephemeral queue
+- Amortized constant-time: a sequence of n function/procedure calls takes a total time that is proportional to some constant times n.
+- Ephemeral queue: there can be only one version of the queue in use at any time.
+- Definition of an ephemeral queue that has amortized constant-time:
+```
+fun {NewQueue} q(nil nil) end
+
+fun {Check Q}
+    case Q of q(nil R) then q({Reverse R} nil) else Q end
+end
+
+fun {Insert Q X}
+    case Q of q(F R) then {Check q(F X|R)} end
+end
+
+fun {Delete Q X}
+    case Q of q(F R) then F1 in F=X|F1 {Check q(F1 R)} end
+end
+
+fun {IsEmpty Q}
+    case Q of q(F R) then F==nil end
+end
+```
+- Info:
+    - This uses the pair q(F R) to represent the queue. F and R are lists.
+    - F represents the front of the queue and R represents the back of the queue in reverse.
+    - In "Delete" function, "F=X|F1" binds the head of list F to X and the tail to F1.
+- Example:
+```
+Q1 = {NewQueue}         % Q1 = q(nil nil)
+Q2 = {Insert Q1 1}      % Q2 = q([1] nil)
+Q3 = {Insert Q2 2}      % Q3 = q([1] [2])
+Q4 = {Insert Q3 3}      % Q4 = q([1] [3 2])
+Q5 = {Insert Q4 4}      % Q5 = q([1] [4 3 2])
+Q6 = {Insert Q5 5}      % Q6 = q([1] [5 4 3 2])
+
+Q7 = {Delete Q6 X}      % Q7 = q([2 3 4 5] nil)  X=1
+Q8 = {Delete Q7 X}      % Q8 = q([3 4 5] nil)    X=2
+
+Q9  = {Insert Q8 6}     % Q9  = q([3 4 5] [6])
+Q10 = {Insert Q9 7}     % Q10 = q([3 4 5] [7 6])
+
+Q11 = {Delete Q10 X}    % Q11 = q([4 5] [7 6])   X=3
+```
+
+#### Assignment 6
+- Consider the FIFO queue defined above.
+    - What happens if you delete an element from an empty queue?
+    - Why is it wrong to define IsEmpty as follows?
+        - `fun {IsEmpty q(N S E)} S==E end`
+
+### Trees
+- Trees are recursive data structures.
+- A tree is either a leaf node or a node that contains one or more trees.
+- Nodes can carry additional information.
+- One possible definition:
+
+<p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/tree_def.png"></p>
+
+- One of many applications for the tree structure: [https://www.youtube.com/watch?v=TrrbshL_0-s](https://www.youtube.com/watch?v=TrrbshL_0-s)
+
+#### Ordered binary tree
+- An ordered binary tree (OBTree) is a binary tree in which each node includes a pair of values:
+
+<p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/binary_tree_def.png"></p>
+
+- Non-leaf nodes include the values *OValue* and *Value*.
+    - OValue (Ordered Value) is a value by which the nodes in a tree are ordered - **Key**.
+    - Value is carried along with no particular condition imposed on it - **Information**.
+
+<p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/binary_tree.png"></p>
+
+#### Storing information in trees
+- An ordered binary tree can be used as a repository of information.
+    - We have to define three operations: looking up, inserting, and deleting entries.
+- Looking up information in an ordered binary tree means to search for a given key, and if it is found return the information present at that node.
+    - With the orderdness condition, the search algorithm can eliminate half the remaining nodes at each step. The number of operations is proportional to the depth of the tree.
+- **Lookup**:
+```
+fun {Lookup X T}
+    case T
+    of leaf then notfound
+    [] tree(Y V T1 T2) andthen X==Y then found(V)
+    [] tree(Y V T1 T2) andthen X<Y  then {Lookup X T1}
+    [] tree(Y V T1 T2) andthen X>Y  then {Lookup X T2}
+    end
+end
+```
+- To insert or delete information in an ordered binary tree, we construct a new tree that is identical to the original except that it has more or less information.
+- **Insert**:
+```
+fun {Insert X V T}
+    case T
+    of leaf then tree(X V leaf leaf)
+    [] tree(Y W T1 T2) andthen X==Y then tree(X V T1 T2)
+    [] tree(Y W T1 T2) andthen X<Y  then tree(Y W {Insert X V T1} T2)
+    [] tree(Y W T1 T2) andthen X>Y  then tree(Y W T1 {Insert X V T2})
+    end
+end
+```
+- Calling {Insert X V T} returns a new tree that has the pair (X V) inserted in the right place.
+    - If T already contains X, then the new tree replaces the old information with V.
+
+#### Deletion and tree reorganizing
+- The delete operation is not as simple as Lookup and Insert, here is a first try (which is wrong):
+```
+fun {Delete X T}
+    case T
+    of leaf then leaf
+    [] tree(Y W T1 T2) andthen X==Y then leaf
+    [] tree(Y W T1 T2) andthen X<Y  then tree(Y W {Delete X T1} T2)
+    [] tree(Y W T1 T2) andthen X>Y  then tree(Y W T1 {Delete X T2})
+    end
+end
+```
+- Calling {Delete X T} should return a new tree that has no node with key X.
+    - The error is that when `X==Y`, the whole  subtree is removed instead of just a single node.
+- When `X==Y`, we have to reorganize the subtree so that it no longer has the key Y but is still an ordered binary tree.
+
+<p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/tree_node_del_easy.png"><br>Deleting node Y when one subtree is a leaf (easy case)</p>
+
+<p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/tree_node_del_hard.png"><br>Deleting node Y when neither subtree is a leaf (hard case)</p>
+
+- To fix the Delete function, we define a function {RemoveSmallest T2} that returns the smallest key of T2, its associated value, and a new tree that lacks this key:
+```
+fun {RemoveSmallest T}
+    case T
+    of leaf then none
+    [] tree(Y V T1 T2) then
+        case {RemoveSmallest T1}
+        of none then Y#V#T2
+        [] Yp#Vp#Tp then Yp#Vp#tree(Y V Tp T2)
+        end
+    end
+end
+```
+- The new Delete function that uses the RemoveSmallest function:
+```
+fun {Delete X T}
+    case T
+    of leaf then leaf
+    [] tree(Y W T1 T2) andthen X==Y then
+        case {RemoveSmallest T2}
+        of none then T1
+        [] Yp#Vp#Tp then tree(Yp Vp T1 Tp)
+        end
+    [] tree(Y W T1 T2) andthen X<Y then
+        tree(Y W {Delete X T1} T2)
+    [] tree(Y W T1 T2) andthen X>Y then
+        tree(Y W T1 {Delete X T2})
+    end
+end
+```
+
+#### Tree traversal
+- Two basic traversals:
+    - *depth-first*: for each node, it visits first the left-most subtree, then the node itself, and then the right-most subtree.
+    - *breadth-first*: it first traverses all nodes at depth 0, then all nodes at depth 1, etc.
+- Depth-first traversal that displays each node's key and information:
+```
+proc {DFS T}
+    case T
+    of leaf then skip
+    [] tree(Key Val L R) then
+        {DFS L}
+        {Browse Key#Val}
+        {DFS R}
+    end
+end
+```
+- Depth-first traversal that calculates a result (a list of all key/value pairs):
+```
+proc {DFSAcc T S1 ?Sn}
+    case T
+    of leaf then Sn=S1
+    [] tree(Key Val L R) then S2 S3 in
+        {DFSAcc L S1 S2}
+        S3 = Key#Val|S2
+        {DFSAcc R S3 Sn}
+    end
+end
+```
+- To implement breadth-first traversal, we need a queue to keep track of all the nodes at a given depth.
+    - The next node to visit comes from the head of the queue.
+    - The node's two subtrees are added to the tail of the queue.
+        - They will be visited when all the other nodes of the queue have been visited (i.e., all the nodes at the current depth).
+- Breadth-first traversal implementation with queues from the previous section:
+```
+proc {BFS T}
+    fun {TreeInsert Q T}
+        if T\=leaf then {Insert Q T} else Q end
+    end
+    
+    proc {BFSQueue Q1}
+        if {IsEmpty Q1} then skip
+        else
+            X Q2 = {Delete Q1 X}
+            tree(Key Val L R) = X
+        in
+            {Browse Key#Val}
+            {BFSQueue {TreeInsert {TreeInsert Q2 L} R}}
+        end
+    end
+in
+    {BFSQueue {TreeInsert {NewQueue} T}}
+end
+```
+
+#### Exercise 3
+- Implement breadth-first traversal (BFSAcc) that calculates a list of key/value pairs (with accumulator, similarly as is done with the depth-first algorithm).
+
+#### Assignment 8
+- Write a function (ListToTree) that takes an unordered list of key/value pairs and returnes an ordered binary tree.
+- Use the function DFSAcc to turn the ordered binary tree into an ordered list.
+
 ---
 
 <div align="center"><b>
