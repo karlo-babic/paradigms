@@ -758,10 +758,145 @@ end
 - Write a function (ListToTree) that takes an unordered list of key/value pairs and returnes an ordered binary tree.
 - Use the function DFSAcc to turn the ordered binary tree into an ordered list.
 
+## 4. Higher-order programming
+- Higher-order programming is the collection of programming techniques that become available when using procesure (or function) values in programs.
+
+### Basic operations
+- Four basic operations that underlie all the techniques of higher-order programming:
+    - **Procedural abstraction**: the ability to convert any statement into a procedure value.
+    - **Genericity**: the ability to pass procedure values as arguments to a procedure call.
+    - **Instantiation**: the ability to return procedure values as results from a procedure call.
+    - **Embedding**: the ability to put procedure values in data structures.
+
+#### Procedural abstraction
+- Any statement can be packaged into a procedure, which does not execute the statement, but instead creates a procedure value (a closure).
+- Executing the procedure value gives exactly the same result as executing the statement.
+
+#### Genericity
+- To make a function generic is to let any specific entity in the function body become an argument of the function.
+    - The specific entity is given when the function is called.
+- Consider the function *SumList*, which we will make a generic version of:
+```
+fun {SumList L}
+    case L
+    of nil then 0
+    [] X|L1 then X+{SumList L1}
+    end
+end
+```
+- This function has two specific entities: the number **zero** and the operation **plus**. The zero is a neutral element for the plus operation.
+    - *Any* neutral element and *any* operation are possible. We give them as parameters, which gives the following generic function:
+```
+fun {FoldR L F U}
+    case L
+    of nil then U
+    [] X|L1 then {F X {FoldR L1 F U}}
+    end
+end
+```
+- SumList definition as a special case of FoldR:
+```
+fun {SumList L}
+    {FoldR L fun {$ X Y} X+Y end 0}
+end
+```
+
+#### Exercise 4
+- Use *FoldR* to define the function "ProductList" that calculates the product of all elements in the list.
+- Use *FoldR* to define the function "Some" that returnes *true* if there is at least one *true* in the list.
+
+#### Instantiation
+- An example of instantiation is a function *MakeSort* that returnes a sorting function:
+```
+fun {MakeSort F}
+    fun {$ L}
+        {Sort L F}
+    end
+end
+```
+
+#### Exercise 5
+- Use *MakeSort* to instantiate a sorting function and sort a list of integers.
+    <details>
+        <summary>Hint</summary>
+        Function "Sort" accepts a list L and a function F. The function F accepts two sortable values (e.g., two integers) and returnes a boolean value.
+    </detalis>
+
+#### Embedding
+- Procedure values can be put in data structures. This has many uses:
+    - **Explicit lazy evaluation** (delayed evaluation): building a data structure on demand.
+    - **Modules**: records that group together a set of related operations.
+    - **Software component**: a generic procedure that takes a set of modules as input arguments and returnes a new module.
+
+## 5. Abstract data types
+- A *data type* (or simply *type*) is a set of values together with a set of operations on these values.
+- The declarative model comes with a predefined set of types.
+    - In Addition to these, the user is free to define new types.
+- A type is *abstract* if it is completely defined by its set of operations, regardless of the implementation.
+    - It is possible to change the implementation of the type without changing its use.
+
+### A declarative stack
+- A stack is a simple example of an abstract data type.
+    - \<Stack T\> contains elements of type T (T being any type).
+- Assume the stack has four operations, with following types:
+    - \< fun {NewStack}: \<Stack T\> \>
+    - \< fun {Push \<Stack T\> T}: \<Stack T\> \>
+    - \< fun {Pop \<Stack T\> T}: \<Stack T\> \>
+    - \< fun {IsEmpty \<Stack T\>}: \<Bool\> \>
+- This set of operations and their types defines the interface of the abstract data type. These operations satisfy certain laws:
+    - A new stack is always empty.
+        - {IsEmpty {NewStack}} = true.
+    - Pushing an element and then popping gives the same element back.
+        - For any E and S0, S1 = {Push S0 E} and S0 = {Pop S1 E} hold.
+    - No elements can be popped off an empty stack.
+        - {Pop {EmptyStack}} raises an error.
+- All implementations have to satisfy these laws. Here is an implementation of the stack:
+```
+fun {NewStack} nil end
+fun {Push S E} E|S end
+fun {Pop S E} case S of X|S1 then E=X S1 end end
+fun {IsEmpty S} S==nil end
+```
+- A program that uses the stack will work with any implementation that satisfies the defined laws.
+- Notice: "Pop" is written using a functional syntax, but one of its arguments is an output.
+
+#### Exercise 6
+- Write an example program that creates a stack, pushes a few elements, pops a few, and checks if the stack is empty.
+
+### A declarative dictionary
+- Another (extremely useful) example of an abstract data type is dictionary.
+- A dictionary is a finite mapping from a set of simple constants to a set of language entities.
+    - Each constant maps to one entity.
+    - The constants are called keys, and the entites are called values.
+- Assume the dictionary (\<Dict\>) has four operations, with following types:
+    - \< fun {NewDict}: \<Dict\> \>
+        - Returnes a new empty dictionary.
+    - \< fun {Put \<Dict\> \<Key\> \<Value\>}: \<Dict\> \> 
+        - Takes a dictionary and returnes a new dictionary that adds the mapping \<Key\> -> \<Value\>. If \<Key\> already exists, then the new dictionary replaces its mapping with the new one.
+    -  \< fun {Get \<Dict\> \<Key\>}: \<Value\> \>
+        -  Returnes the value corresponding to \<Key\>. If there is none, an exception is raised.
+    -   \< fun {Domain \<Dict\>}: \<List \<Key\>\> \>
+        -   Returnes a list of the key in \<Dict\>.
+
+#### List-based implementation
+- Dictionary can be implemented with a list representing the dictionary.
+    - List contains Key#Value pairs that are sorted on the key.
+- A list-based implementation would be extremely slow for large dictionaries.
+    - The number of operations is O(n) for dictionaries with n keys (for both *Put* and *Get*).
+
+#### Tree-based implementation
+- A more efficient implementation of dictionaries is possible by using an ordered binary tree.
+    - *Put* is simply *Insert*, and *Get* is very similar to *Lookup*.
+- In this implementation, the *Put* and *Get* operations take O(log n) time and space for a tree with n nodes.
+
+#### State-based implementation
+- We can do even better that the tree-based implementation by leaving the declarative model behind and using explicit state.
+    - Using state can reduce the execution time of *Put* and *Get* operations to amortized constant time.
+
 ---
 
 <div align="center"><b>
   <a href="1-Introduction-to-Programming-Concepts.html" style="font-size:64px; text-decoration:none"> < </a>
   <a href="Contents.html" style="font-size:64px; text-decoration:none"> ^ </a>
-  <a href="" style="font-size:64px; text-decoration:none">  </a>
+  <a href="3-Explicit-State.html" style="font-size:64px; text-decoration:none"> > </a>
 </b></div>
