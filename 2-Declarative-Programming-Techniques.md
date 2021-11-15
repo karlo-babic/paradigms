@@ -759,7 +759,7 @@ end
 - Use the function DFSAcc to turn the ordered binary tree into an ordered list.
 
 ## 4. Higher-order programming
-- Higher-order programming is the collection of programming techniques that become available when using procesure (or function) values in programs.
+- Higher-order programming is the collection of programming techniques that become available when using procedure (or function) values in programs.
 
 ### Basic operations
 - Four basic operations that underlie all the techniques of higher-order programming:
