@@ -234,17 +234,6 @@ X = {S.pop}
     - {CountUp} should iterate that value by +1.
     - {CounterVal} should return the current counter value.
 
-## ... 481 ... 481
- 
-plan:
- - 6 Explicit state
-     - [x] 6.1 State
-     - [ ] 6.2 State and system building [461]
-     - [ ] 6.4.2 Variations on a stack [472]
-     - 6.5 Stateful collections [481]
-     - 6.8.3 Generating random numbers [519]
- - 7 Object-oriented programming
- 
 ---
 
 <div align="center"><b>
