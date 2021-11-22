@@ -68,6 +68,183 @@ end
 #### Exercise 1
 - Define a SumList function that uses a cell to sum the numbers in a list, instead of an accumulator.
 
+## 2. State and system building
+- *The principle of abstraction* is the most successful system-building principle for intelligent being with finite thinking abilities.
+- A system can be built as a series of layers. It is not necessary to understand everything at once.
+    - Each layer's implementation interacts with the specification of the lower layer, and provides its own specification for the higher layer.
+
+### System properties
+- The three properties a system should have to best support the principle of abstraction:
+    - **Encapsulation**: It should be possible to hide the internals of a part.
+    - **Compositionality**: It should be possible to combine parts to make a new part.
+    - **Instantiation**: It should be possible to create many instances of a part based on a single definition. These instances "plug" themselves into their environment when they are created.
+
+### Component-based programming
+- Those three properties (encapsulation, compositionality, and instantation) define component-based programming.
+- A component specifies a program fragment with an inside and an outside (i.e., with a defined interface).
+    - The inside is hidden from the outside, except for what the interface permits.
+- In component-based programming, the natural way to extend a component is by using *composition*: build a new component that contains the original one.
+    - The new component offers a new functionality and uses the old component to implement the functionality.
+
+### Object-oriented programming
+- Object-oriented programming adds a fourth property to component-based programming:
+    - **Inheritance**: It is possible to build the system in incremental fashion, as a small extension or modification of another system.
+- Incementally-built components are called *classes* and their instances are called *objects*.
+- Although component composition is less flexible than inheritence, it is much simpler to use.
+    - Use inheritence only when composition is insufficient.
+
+## 3. Abstract data types
+- An abstract data type (ADT) is a set of values together with a set of operations on those values (as we saw in the previous chapter).
+- An ADT with the same functionality can be orginized in many different ways:
+    - **Openness**: open or secure.
+        - An *open* ADT is one in which the internal representation is completely visible to the whole program.
+        - A *secure* ADT is one in which the implementation is concentrated in one part of the program and is inaccessible to the rest of the program.
+        - An ADT can be partially secure: the rights to look at its internal representation can be given out in a controlled way.
+    - **State**: stateless or stateful.
+        - A *stateless* ADT (i.e., a declarative ADT) is written in the declarative model. With this approach, ADT instances cannot be modified, but new ones must be created.
+        - A *stateful* ADT internally uses explicit state. Examples of stateful ADTs are components and objects. With this approach, ADT instances can change as a function of time.
+    - **Bundling**: unbundled or bundled.
+        - An *unbundled* ADT is one that can seperate its data from its operations.
+        - A *bundled* ADT is one that keeps together its data and its operations in such a way that they cannot be separated by the user.
+
+### Variations on a stack
+- Let us take the \<Stack T\> type and see how to adapt it to some of the eight possibilities:
+    - Open, declarative, and unbundled
+        - The usual open declarative style, as it exists in Prolog and Scheme.
+    - Secure, declarative, and unbundled
+        - The declarative style is made secure by using wrappers.
+    - Secure, declarative, and bundled
+        - Bundling gives an object-oriented flavor to the declarative style.
+    - Secure, stateful, and bundled
+        - The usual object-oriented style, as it exists in Smalltalk and Java.
+
+#### Open declarative unbundled stack
+- The basic stack implementation:
+```
+fun {NewStack} nil end
+fun {Push S E} E|S end
+fun {Pop S ?E}
+    case S of X|S1 then E=X S1 end
+end
+fun {IsEmpty S} S==nil end
+```
+- Example usage:
+```
+declare S1 S2 S3 X
+S1 = {NewStack}
+{Browse {IsEmpty S1}}
+S2 = {Push S1 23}
+S3 = {Pop S2 X}
+{Browse X}
+```
+
+#### *Secure* declarative unbundled stack
+- We make this version secure by using a wrapper/unwrapper pair:
+```
+local Wrap Unwrap in
+    {NewWrapper Wrap Unwrap}
+    fun {NewStack} {Wrap nil} end
+    fun {Push S E} {Wrap E|{Unwrap S}} end
+    fun {Pop S ?E}
+        case {Unwrap S} of X|S1 then E=X {Wrap S1} end
+    end
+    fun {IsEmpty S} {Unwrap S}==nil end
+end
+```
+- The stack is unwrapped when entering the ADT and wrapped when exiting.
+    - Outside the ADT, the stack is always wrapped.
+    - Once a stack is wrapped (with the *Wrap* function), it can be unwrapped only by the *Unwrap* function that is paired with the *Wrap* function.
+- Usage looks the same as in the previous example.
+- NewWrapper implementation:
+```
+proc {NewWrapper ?Wrap ?Unwrap}
+    Key = {NewName}
+in
+    fun {Wrap X}
+        fun {$ K} if K==Key then X end end
+    end
+    fun {Unwrap W}
+        {W Key}
+    end
+end
+```
+
+#### Secure declarative *bundled* stack
+- Let us now make a bundled version of the declarative stack. The idea is to hide the stack inside the operations, so it cannot be separated from them:
+```
+local
+    fun {StackOps S}
+        fun {Push X} {StackOps X|S} end
+        fun {Pop ?E}
+            case S of X|S1 then E=X {StackOps S1} end
+        end
+        fun {IsEmpty} S==nil end
+    in
+        ops(push:Push pop:Pop isEmpty:IsEmpty)
+    end
+in
+    fun {NewStack} {StackOps nil} end
+end
+```
+- This version does not need wrapping to be secure, since wrapping is only needed for unbundled ADTs.
+- The function *StackOps* takes a list S and returns a record of procedure values, `ops(push:Push pop:Pop isEmpty:IsEmpty)`, in which S is hidden by lexical scoping.
+- Example usage:
+```
+declare S1 S2 S3 X
+S1 = {NewStack}
+{Browse {S1.isEmpty}}
+S2 = {S1.push 23}
+S3 = {S2.pop X}
+{Browse X}
+```
+- Because this version is both bundled and secure, we can consider it as a declarative form of object-oriented programming.
+
+#### Secure *stateful* bundled stack
+- Now let us construct a stateful version of the stack:
+```
+fun {NewStack}
+    C = {NewCell nil}
+    proc {Push X} C:=X|@C end
+    fun {Pop}
+        case @C of X|S1 then C:=S1 X end
+    end
+    fun {IsEmpty} @C==nil end
+in
+    ops(push:Push pop:Pop isEmpty:IsEmpty)
+end
+```
+- This version provides the basic functionality of object-oriented programming: a group of operations (methods) with a hidden internal state.
+- Example usage:
+```
+S = {NewStack}
+{Browse {S.isEmpty}}
+{S.push 23}
+X = {S.pop}
+{Browse X}
+```
+
+#### Assignment 1
+- Implement the counter component defined below in the four ways that were explained in this section:
+    - open declarative unbundled counter,
+    - *secure* declarative unbundled counter,
+    - secure declarative *bundled* counter,
+    - secure *stateful* bundled counter.
+- Counter:
+    - {NewCounter} should initialize a new counter with value 0.
+    - {CountUp} should iterate that value by +1.
+    - {CounterVal} should return the current counter value.
+
+## ... 481 ... 481
+ 
+plan:
+ - 6 Explicit state
+     - [x] 6.1 State
+     - [ ] 6.2 State and system building [461]
+     - [ ] 6.4.2 Variations on a stack [472]
+     - 6.5 Stateful collections [481]
+     - 6.8.3 Generating random numbers [519]
+ - 7 Object-oriented programming
+ 
 ---
 
 <div align="center"><b>
