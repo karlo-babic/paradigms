@@ -234,10 +234,134 @@ X = {S.pop}
     - {CountUp} should iterate that value by +1.
     - {CounterVal} should return the current counter value.
 
+## 4. Stateful collections
+- Collection is an important kind of ADT: it groups together a set of partial values into one compound entity.
+- There are different kinds of collections:
+    - Indexed or unindexed collections.
+        - Whether or not there is rapid access to individual elements (through an index).
+    - Extensible or inextensible collections.
+        - Whether the number of elements is variable or fixed.
+
+### Indexed collections
+- We have already used (in declarative programming) tuples and records.
+    - The *stateful* versions of tuples and records are *arrays* and *dictionaries*.
+
+<p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/indexed_collections.png"><br>Varieties of indexed collections</p>
+
+### Unindexed collections
+- Indexed collections are not always the best choice, sometimes it is better to use an unindexed collection.
+- Lists are an example of an unindexed collection.
+
+### Extensible collections
+- Dictionaries are an example of an extensible collection.
+- The extensible array is an array that is resized upon overflow.
+    - It has the advantage of constant-time access and significantly less memory usage than dictionaries.
+
+## 5. Case study
+
+### Generating random numbers
+- Random number generation can be very useful (statistical sampling, computer simulation, cryptography, and other areas where unpredictability is desirable).
+
+#### Different approaches
+- Use unpredictable events in the computer (related to concurrency).
+    - Using the thread scheduler as a source of randomness will give some fluctuations, but they do not have a useful probability distribution and they are linked with the computation.
+- Rely on a source of true randomness (quantum).
+    - For example, electronic circuits generate noise, which is a completely unpredictable signal whose approximate probability distribution is known.
+    - Two problems with electronic circuit noise:
+        - The probability distribution is not exactly known (it might vary from one circuit to the next or with the ambient temperature).
+        - The randomness cannot be reproduced (except by storing the random numbers and replaying them)
+- Pseudorandom numbers.
+    - We woud like true randomness and we would like it to be reproducible (impossible to have both).
+    - Pseudorandom numbers are calculated in a way that appears to generate random numbers, but the generation is reproducible.
+
+#### Uniformly distributed pseudorandom numbers
+- A random number generator stores an internal state, with which it calculates the next random number and the next internal state.
+- The generator is initialized with a number called its *seed*.
+    - Initializing it again with the same seed should give the same sequence of random numbers.
+- Definition of the abstract data type of a random number generator:
+    - {NewRand ?Rand ?Init ?Max}, which returnes:
+        - *Rand* - a random number generator,
+        - *Init* - its initialization procedure,
+        - *Max* - its maximum value.
+    - {Init Seed} initializes the generator with integer seed *Seed*, that should be in the range 0, 1, ..., Max.
+    - X={Rand} generates a new random number X and updates the internal state. X is an integer in the range 0, 1, ..., Max-1 and has a uniform distribution (i.e, all integers have the same probability of appearing).
+- In our implementation of the generator we will use the linear congruential generator algorithm. If x is the internal state and s is the seed, then the internal state is updates as follows:
+    - x<sub>0</sub> = s
+    - x<sub>n</sub> = (ax<sub>n-1</sub> + b) mod m
+- The constants a, b, and m have to be carefully chosen so that the sequence x<sub>0</sub>, x<sub>1</sub>, x<sub>2</sub>, ..., has good properties.
+- Stateful implementation:
+```
+local
+    A = 333667
+    B = 213453321
+    M = 1000000000
+in
+    proc {NewRand ?Rand ?Init ?Max}
+        X = {NewCell 0}
+    in
+        proc {Init Seed} X:=Seed end
+        fun {Rand} X := (A*@X+B) mod M in @X end
+        Max = M
+    end
+end
+```
+- Usage:
+```
+declare Rand Init Max
+{NewRand Rand Init Max}
+{Init 10}
+{Browse {Rand}}
+{Browse {Rand}}
+```
+- Lazy implementation (using laziness instead of state):
+```
+local
+    A = 333667
+    B = 213453321
+    M = 1000000000
+in
+    fun lazy {RandList S0}
+        S1 = (A*S0+B) mod M
+    in
+        S1|{RandList S1}
+    end
+end
+```
+- Usage:
+```
+declare
+L = {RandList 10}
+{Browse L.1}
+{Browse L.2.1}
+```
+
+#### Assignment 2
+- Define the function {Uniform} that will generate a uniform distribution from 0 to 1 (use the stateful {Rand} defined above, and the function {IntToFloat X}).
+- Define the function {UniformRange A B} that will generate a uniform distribution from A to B (use {Uniform} you defined, and the function {IntToFloat X}).
+
+#### Assignment 3
+- Implement a random number generator that uses nondeterminism in concurrency ([race condition](https://karlo-babic.github.io/paradigms/1-Introduction-to-Programming-Concepts.html#nondeterminism-and-time)) as the source of randomness.
+    - Limit the value to the range between 0 and 1.
+- What are the main problems with your implementation? What are the core problems with using concurrency as the source of randomness?
+ 
+ ## 6. Object-Oriented Programming
+
+- *Object-oriented programming* is a useful way of structuring stateful programs.
+    - It introduces one new concept, *inheritance*, which allows to define ADTs (abstract data types) in incemental fashion.
+- We loosely define object-oriented programming as programming with encapsulation, explicit state, and inheritence.
+- Stateful abstract data types are a very useful concept for organizing a program.
+    - A program can be built in a hierachical structure as ADTs that depend on other ADTs (component-based programming).
+    - Object-oriented programming takes this idea one step further. It is based on the observation that components frequently have much in common.
+    - An ADT can be defined as an existing ADT (it inherits from an existing ADT) with some changes.
+- An object is an entity that encapsulates a state so that it can only be accessed in a controled way.
+- A class is an entity that specifies an object in an incremental way, by defining the classes (its direct ancestors) that the object inherits from and defining how the class is different from the ancestors.
+- Inheritance is a *programming technique*, and the underlying computation model (paradigm) of object-oriented programming is simply the stateful model (from the previous chapter: declarative model + explicit state).
+    - Object-oriented languages provide linguistic support for inheritance by adding classes as a linguistic abstraction.
+
 ---
 
 <div align="center"><b>
   <a href="2-Declarative-Programming-Techniques.html" style="font-size:64px; text-decoration:none"> < </a>
   <a href="Contents.html" style="font-size:64px; text-decoration:none"> ^ </a>
-  <a href="" style="font-size:64px; text-decoration:none">  </a>
+  <a href="4-Declarative-Concurrency.html" style="font-size:64px; text-decoration:none"> > </a>
 </b></div>
