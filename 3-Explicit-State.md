@@ -340,7 +340,7 @@ L = {RandList 10}
 - Define the function {UniformRange A B} that will generate a uniform distribution from A to B (use {Uniform} you defined, and the function {IntToFloat X}).
 
 #### Assignment 3
-- Implement a random number generator that uses nondeterminism in concurrency ([race condition](https://karlo-babic.github.io/paradigms/1-Introduction-to-Programming-Concepts.html#nondeterminism-and-time)) as the source of randomness.
+- Implement a random number generator that uses [nondeterminism in concurrencyrace condition](https://karlo-babic.github.io/paradigms/1-Introduction-to-Programming-Concepts.html#nondeterminism-and-time) as the source of randomness. Make use of the fact that the time a thread takes to store a value into a cell is nondeterministic (a recursion can happen thousands of times while a value is being stored into a cell).
     - Limit the value to the range between 0 and 1.
 - What are the main problems with your implementation? What are the core problems with using concurrency as the source of randomness?
  
