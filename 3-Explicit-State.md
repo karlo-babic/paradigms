@@ -347,7 +347,7 @@ L = {RandList 10}
  ## 6. Object-Oriented Programming
 
 - *Object-oriented programming* is a useful way of structuring stateful programs.
-    - It introduces one new concept, *inheritance*, which allows to define ADTs (abstract data types) in incemental fashion.
+    - It introduces one new concept, *inheritance*, which allows to define ADTs (abstract data types) in incremental fashion.
 - We loosely define object-oriented programming as programming with encapsulation, explicit state, and inheritence.
 - Stateful abstract data types are a very useful concept for organizing a program.
     - A program can be built in a hierachical structure as ADTs that depend on other ADTs (component-based programming).
