@@ -89,7 +89,7 @@ end
 ### Object-oriented programming
 - Object-oriented programming adds a fourth property to component-based programming:
     - **Inheritance**: It is possible to build the system in incremental fashion, as a small extension or modification of another system.
-- Incementally-built components are called *classes* and their instances are called *objects*.
+- Incrementally-built components are called *classes* and their instances are called *objects*.
 - Although component composition is less flexible than inheritence, it is much simpler to use.
     - Use inheritence only when composition is insufficient.
 
