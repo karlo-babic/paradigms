@@ -1,6 +1,6 @@
 # Declarative Concurrency
 
-> "More thread not always faster." 
+> "More thread not always faster."   
 > \- By a forum user (2019)
 
 - The declarative model lets us write many programs and use powerful reasoning techniques on them. But some useful programs cannot be written easily or efficiently in it.
