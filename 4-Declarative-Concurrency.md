@@ -230,8 +230,8 @@ fun {Sum Xs A}
 end
 
 local Xs S in
-    thread Xs={Generate 0 150000} end  % Producer thread
-    thread S={Sum Xs 0} end  % Consumer thread
+    thread Xs = {Generate 0 150000} end  % Producer thread
+    thread S = {Sum Xs 0} end            % Consumer thread
     {Browse S}
 end
 ```
@@ -292,6 +292,101 @@ local Xs Ys in
     {Browse Ys}
 end
 ```
+
+## 3. Demand-driven concurrency
+- Demand-driven evaluation, or **lazy evaluation**, in contrast to the usual execution strategy (eager evaluation or data-driven evaluation) executes a statement when its result is needed somewhere else in the program.
+    - Data-driven evaluation executes statements in order.
+- For example:
+```
+fun lazy {F1 X} 1+X*(3+X*(3+X)) end
+fun lazy {F2 X} Y=X*X in Y*Y end
+fun lazy {F3 X} (X+1)*(X+1) end
+A = {F1 10}
+B = {F2 20}
+C = {F3 30}
+D = A+B
+```
+- Info:
+    - The three functions F1, F2, and F3 are lazy functions.
+    - The lazy functions are not executed when they are called.
+        - They create stopped executions that will be continued only when their results are needed.
+    - In this example, the function calls A={F1 10}, B={F2 20}, and C={F3 30} all create stopped executions.
+        - When the addition D=A+B is invoked, the values of A and B are needed. This triggers the execution of the first two calls. After the calls finish, the addition can continue. Since C is not needed, the third call is not executed.
+
+### Lazy streams
+- In the producer/consumer example in a previous section, it is the producer that decides how many list elements to generate (i.e., execution is eager).
+- Here is how to do that example with a lazy function that generates a potentially infinite list:
+```
+fun lazy {Generate N}
+    N|{Generate N+1}
+end
+
+fun {Sum Xs A Limit}
+    if Limit>0 then
+        case Xs of X|Xr then
+            {Sum Xr A+X Limit-1}
+        end
+    else A end
+end
+
+local Xs S in
+    Xs = {Generate 0}      % Producer
+    S = {Sum Xs 0 150000}  % Consumer
+    {Browse S}
+end
+```
+- Info:
+    - The *Generate* call does not need to be put in its own thread (in contrast to the eager version).
+    - In this example, it is the consumer that decides how many list elements should be generated.
+    - With bigger lists, this (lazy) version is faster as it needs only a very small memory space during execution, while the eager version needs a huge memory space.
+- The multiple reader example with lazy execution:
+```
+local Xs S1 S2 S3 in
+    Xs = {Generate 0}
+    thread S1 = {Sum Xs 0 150000} end
+    thread S2 = {Sum Xs 0 100000} end
+    thread S3 = {Sum Xs 0 50000} end
+end
+```
+
+#### Assignment 2
+- Implement a pipeline defined below:
+```
+declare
+
+Step = 0.1
+
+fun lazy {Generate N} end
+fun lazy {ListSin Xs} end
+fun lazy {ListCos Xs} end
+fun lazy {ListSlope Xs} end
+fun lazy {Diff Xs Ys} end
+fun {GetList L N} end
+fun {Sum Xs} end
+
+local Time Sinus Slope Err L in
+   Time = {Generate 0.0}
+   Sinus = {ListSin Time}
+   Cosinus = {ListCos Time}
+   Slope = {ListSlope Sinus}
+   Err = {Diff Cosinus Slope}
+
+   L = {GetList Err 100}
+   {Browse L}
+   {Browse ({Sum L}/100.0)}
+end
+```
+- {Generate N} lazily generates floats (from 0.0 to infinity, step size can be 0.1).
+- {ListSin Xs} lazily calculates sinus values using values from the list Xs as inputs.
+    - Use {Sin X}, which returnes the sinus of X, where X is a float.
+- {ListCos Xs} lazily calculates cosinus values using values from the list Xs as inputs.
+    - Use {Cos X}, which returnes the cosinus of X, where X is a float.
+- {ListSlope Xs} lazily calculates slope of the function described by the values from the list Xs. The slope is approximation of derivation. Derivation of sinus is cosinus.
+    - Formula for slope using two neighboring points in a function: [(f(x+step)-f(x))/step](https://en.wikipedia.org/wiki/Numerical_differentiation)
+- {Diff Xs Ys} lazily calculates the diference between all the values in lists Xs and Ys.
+    - {Diff [1 2 3] [3 2 1]} = [-2 0 2]
+- {GetList L N} returnes a list by taking the first N elements from the list L.
+- {Sum Xs} returnes the sum of elements in the list Xs.
 
 ---
 
