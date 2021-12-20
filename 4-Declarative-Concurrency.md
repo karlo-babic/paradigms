@@ -349,44 +349,7 @@ local Xs S1 S2 S3 in
 end
 ```
 
-#### Assignment 2
-- Implement a pipeline defined below:
-```
-declare
 
-Step = 0.1
-
-fun lazy {Generate N} end
-fun lazy {ListSin Xs} end
-fun lazy {ListCos Xs} end
-fun lazy {ListSlope Xs} end
-fun lazy {Diff Xs Ys} end
-fun {GetList L N} end
-fun {Sum Xs} end
-
-local Time Sinus Slope Err L in
-   Time = {Generate 0.0}
-   Sinus = {ListSin Time}
-   Cosinus = {ListCos Time}
-   Slope = {ListSlope Sinus}
-   Err = {Diff Cosinus Slope}
-
-   L = {GetList Err 100}
-   {Browse L}
-   {Browse ({Sum L}/100.0)}
-end
-```
-- {Generate N} lazily generates floats (from 0.0 to infinity, step size can be 0.1).
-- {ListSin Xs} lazily calculates sinus values using values from the list Xs as inputs.
-    - Use {Sin X}, which returnes the sinus of X, where X is a float.
-- {ListCos Xs} lazily calculates cosinus values using values from the list Xs as inputs.
-    - Use {Cos X}, which returnes the cosinus of X, where X is a float.
-- {ListSlope Xs} lazily calculates slope of the function described by the values from the list Xs. The slope is approximation of derivation. Derivation of sinus is cosinus.
-    - Formula for slope using two neighboring points in a function: [(f(x+step)-f(x))/step](https://en.wikipedia.org/wiki/Numerical_differentiation)
-- {Diff Xs Ys} lazily calculates the diference between all the values in lists Xs and Ys.
-    - {Diff [1 2 3] [3 2 1]} = [-2 0 2]
-- {GetList L N} returnes a list by taking the first N elements from the list L.
-- {Sum Xs} returnes the sum of elements in the list Xs.
 
 ---
 
