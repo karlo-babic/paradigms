@@ -392,6 +392,158 @@ end
     - {Diff [1 2 3]  [3 2 1]} = [-2 0 2]
 - {GetList L N} returnes a list by taking the first N elements from the list L. Delay each element with a {Delay 100} to slowly construct the list.
 
+### Lazy list operations
+- We need lazy versions of list operations for the next section (List comprehensions). 
+
+#### Lazy mapping
+- Map evaluates a function on all elemets of a list and returnes the new list. Lazy version takes any list or lazy list and returns a lazy list:
+```
+fun lazy {LMap Xs F}
+    case Xs
+    of nil then nil
+    [] X|Xr then {F X}|{LMap Xr F}
+    end
+end
+```
+
+#### Lazy integer lists
+- The function {LFrom I J} generates a lazy list of integers from I to J:
+```
+fun {LFrom I J}
+    fun lazy {LFromLoop I}
+        if I>J then nil else I|{LFromLoop I+1} end
+    end
+    fun lazy {LFromInf I} I|{LFromInf I+1} end
+in
+    if J==inf then {LFromInf I} else {LFromLoop I} end
+end
+```
+
+#### Lazy flatten
+- The function {LFlatten Xs} takes a list that contains lists and returns a flat list that contains all the elements from all the sublists:
+```
+fun {LFlatten Xs}
+    fun lazy {LFlattenD Xs E}
+        case Xs
+        of nil then E
+        [] X|Xr then
+            {LFlattenD X {LFlattenD Xr E}}
+        [] X then X|E
+        end
+    end
+in
+    {LFlattenD Xs nil}
+end
+```
+
+#### Lazy filter
+- The lazy function {LFilter L F} filters an input list according to a condition F:
+```
+fun lazy {LFilter L F}
+    case L
+    of nil then nil
+    [] X|L2 then
+        if {F X} then X|{LFilter L2 F} else {LFilter L2 F} end
+    end
+end
+```
+
+### List comprehensions
+- List comprehensions are a powerful tool for calculating with lazy streams.
+- They allow to specify lazy streams in a way that closely resembles the mathematical notation of set comprehension.
+    - The list comprehension [ x*y | 1≤x≤10, 1≤y≤x ] specifies the list [1\*1 2\*1 2\*2 3\*1 3\*2 3\*3 ... 10\*10].
+- Because of laziness the list comprehension can generate a potentially unbounded stream, not just a finite list.
+- List comprehensions have the basic form:
+    - [ f(x) | x <- generator(), guard(x) ]
+    - The generator calculates a lazy list whose elements are successively assigned to x.
+    - The guard is a boolean function.
+    - The resulting list will contain elements f(x), where f is any function and x takes values from the generator for which the guard is true.
+    - A list comprehension can can have multiple generators and guards. The generators, when taken from left to right, are considered as nested loops.
+- The list comprehension: z = [ x#x | x <- from(1,10) ] can be programmed as:
+```
+Z = {LMap {LFrom 1 10} fun {$ X} X#X end}
+```
+- The list comprehension: z = [ x#y | x <- from(1,10), y <- from(1,x) ] can be programmed as:
+```
+Z = {LFlatten
+        {LMap {LFrom 1 10} fun {$ X}
+            {LMap {LFrom 1 X} fun {$ Y}
+                X#Y
+            end}
+        end}}
+```
+- The list comprehension: z = [ x#y | x <- from(1,10), y <- from(1,10), x+y≤10) ] produces the list of all pairs x#y such that the sum x+y is at most 10. It can be programmed as:
+```
+Z = {LFilter
+        {LFlatten
+            {LMap {LFrom 1 10} fun {$ X}
+                {LMap {LFrom 1 10} fun {$ Y}
+                    X#Y
+                end}
+            end}}
+        fun {$ X#Y} X+Y=<10 end}
+```
+
+## 4. Other concurrency models
+- **Declarative concurrency** (this chapter) is concurrency in the declarative model, which gives the same results as a sequential program but can give them incrementally. This model is usable when there is no observable nondeterminism.
+- **Message-passing concurrency**: messages are passed between port objects, which are internally sequential.
+- **Shared-state concurreny**: threads update shared passive objects using atomic actions.
+
+### Message-passing concurrency
+- In the current chapter we saw how to program with stream objects, which is both declarative and concurrent.
+    - But it has the limitation that it cannot handle observable nondeterminism. We cannot program a client/server where the server does not know which client will send it the next message.
+    - We can remove this limitation by extending the model with an asynchronous communication channel. Then any client can send messages to the channel and the server can read them from the channel.
+        - We use a channel called a port that has an associated stream. Sending a message to the port causes the message to appear on the port's stream.
+    - The extended model is called **message-passing concurrent model**. Since this model is nondeterministic, it is no longer declarative.
+- A **port** is an ADT that has two operations, creating a channel and sending to it:
+    - {NewPort S P}: create a new port with entry point P and stream S.
+    - {Send P X}: append X to the stream corresponding to the entry point P.
+- Example port usage:
+```
+declare S P
+{NewPort S P}
+{Browse S}
+{Send P a}
+{Send P b}
+```
+- A **port object** is a combination of one or more ports and a stream object.
+    - This extends stream objects in two ways:
+        - Many-to-one communication is possible (many threads can reference a given port object and send to it independently).
+        - Port objects can be embedded inside data structures.
+- Example port object usage:
+```
+declare P
+local S in
+    {NewPort S P}
+    thread for M in S do {Browse M} end end
+end
+
+{Send P hi}
+```
+- The thread contains a recursive procedure (*for loop* in this case) that reads the port streams and performs some action for each message received (*Browse* in this case).
+
+#### Exercise 1
+- Implement two port objects that send to each other "ping" and "pong".
+    - Port1 sends "ping" to Port2, and then the Port2 answers with "pong", to which Port1 answers with "ping", etc.
+
+### Shared-state concurrency
+- The shared-state concurrent model is a simple extension to the declarative concurrent model that adds explicit state in the form of cells (mutable variables).
+- This model is equivalent in expressiveness to the message-passing concurrent model, because cells can be efficiently implemented with ports and vice versa.
+- In practice the shared-state model is harder to program than the message-passing model.
+    - It is easy to imagine why: multiple threads are accessing same mutable variables and the order in which the threads access those variables is unknown.
+        - There are many possible executions (ways in which the program's operations are interleaved).
+        - We manage the interleavings with atomic actions on shared cells (locking, monitors, transactions).
+
+### Distributed programming
+- A distributed system is a set of computers that are linked together by a network.
+- Ideally, distributed programming would be just a kind of concurrent programming, and the techniques we have seen would still apply.
+    - *Nope*, distributed programming has its own problems:
+        - Each process has its own adress space.
+        - The network has limited performance.
+        - Some resources are localized (such as the file system).
+        - The distributed system can fail partially.
+        - The distributed system is open (independent users and computers cohabit the system).
+
 ---
 
 <div align="center"><b>
