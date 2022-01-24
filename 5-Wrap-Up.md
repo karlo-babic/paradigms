@@ -5,7 +5,7 @@ means that the intrinsic complexity of the application is what's left."
 > \- Security Engineering, Ross J. Anderson (2001)
 
 > "If you want people to do something the right way, you must make
-the right way the easy way."
+the right way the easy way."  
 > \- Traditional saying
 
 ## Other paradigms
