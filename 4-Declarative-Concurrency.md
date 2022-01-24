@@ -188,7 +188,7 @@ Zs = nil
         - **NT**: The number of threads.
         - **NP**: The total number of points.
     - For the source of random numbers use the stateful implementation of the pseudorandom number generator from the previous chapter.
-    - `{Sqrt (X*X + Y*Y)} < 1.0` will be true for the points that are inside of the circle with radious 1.
+    - `{Sqrt (X*X + Y*Y)} < 1.0` will be true for the points that are inside of the circle with radius 1.
     - Use only floats.
 
 <p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/mc_pi.png
@@ -487,7 +487,7 @@ Z = {LFilter
 ## 4. Other concurrency models
 - **Declarative concurrency** (this chapter) is concurrency in the declarative model, which gives the same results as a sequential program but can give them incrementally. This model is usable when there is no observable nondeterminism.
 - **Message-passing concurrency**: messages are passed between port objects, which are internally sequential.
-- **Shared-state concurreny**: threads update shared passive objects using atomic actions.
+- **Shared-state concurrency**: threads update shared passive objects using atomic actions.
 
 ### Message-passing concurrency
 - In the current chapter we saw how to program with stream objects, which is both declarative and concurrent.
@@ -549,5 +549,5 @@ end
 <div align="center"><b>
   <a href="3-Explicit-State.html" style="font-size:64px; text-decoration:none"> < </a>
   <a href="Contents.html" style="font-size:64px; text-decoration:none"> ^ </a>
-  <a href="" style="font-size:64px; text-decoration:none">  </a>
+  <a href="5-Wrap-Up.html" style="font-size:64px; text-decoration:none"> > </a>
 </b></div>
