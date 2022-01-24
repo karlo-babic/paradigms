@@ -51,14 +51,6 @@ the right way the easy way."
 - **Shared-state concurrent model** -> This is the declarative model extended with both explicit state and threads. This model contains concurrent object-oriented programming. Reasoning with this model is the most complex since there can be multiple histories interacting in unpredictable ways.
 - **Relational model** -> This is the declarative model extended with search. It encompasses nondeterministic logic programming. This model is a precursor to constraint programming.
 
-## ... 338 ... 333
-- Conclusion
-    - 4.7.5. Picking the right model (p. 366)
-    - 4.7.6. Extended models
-    - 4.7.7. Using different models together
-    - Appendix D. General computation model (p. 888)
-- Vježba za ispit
-
 ---
 
 <div align="center"><b>
