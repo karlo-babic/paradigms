@@ -579,7 +579,7 @@ end
             <img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/interleaving.png">
         </detalis>
     </detalis>
-- Programming with state and concurreny:
+- Programming with explicit state and concurrency:
     - If possible, do not use state and concurrency together (as their interaction brings complications).
     - If a program does need to have both, it is probably possible to design it so state and concurrency interact only in a very small part of the program.
 
