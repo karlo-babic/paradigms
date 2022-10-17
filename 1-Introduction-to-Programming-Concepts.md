@@ -543,7 +543,7 @@ Ctr2 = {NewCounter}
 - Nondeterminism by itself is not a problem, we already have it with concurrency.
     - We lack the knowledge of the exact time when each operation executes (in different threads).
     - Nondeterminism becomes difficult when it becomes *observable* (*race condition*).
-- Having both *state* and *concurrency* at the same time becomes tricky (nondeterminism becomes observable).
+- Having both *explicit state* and *concurrency* at the same time becomes tricky (nondeterminism becomes observable).
     - The same program can give different results from one execution to the next because the order in which threads access the state can change from one execution to the next.
 - An example of observable nondeterminism (race condition):
 ```
