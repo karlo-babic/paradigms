@@ -590,9 +590,7 @@ Q11 = {Delete Q10 X}    % Q11 = q([4 5] [7 6])   X=3
 
 #### Assignment 6
 - Consider the FIFO queue defined above.
-    - What happens if you delete an element from an empty queue?
-    - Why is it wrong to define IsEmpty as follows?
-        - `fun {IsEmpty q(N S E)} S==E end`
+    - What happens if you delete an element from an empty queue? Explain.
 
 ### Trees
 - Trees are recursive data structures.
