@@ -755,7 +755,7 @@ end
 #### Assignment 7
 - Write a function (ListToTree) that takes an unordered list of key/value pairs and returnes an ordered binary tree.
     - `Tree = {ListToTree [5#o 4#w 1#l 6#l 7#l 0#d 9#h 8#e 3#o 2#r]}`
-    - You will need the function "Insert" defined above to insert each node into the tree that is being constructed.
+    - You will need the function "Insert" defined in this section to insert each node into the tree that is being constructed.
 - Use the function DFSAcc to turn the ordered binary tree into an ordered list.
 
 ## 4. Higher-order programming
