@@ -820,10 +820,10 @@ end
 ```
 
 #### Exercise 5
-- Use *MakeSort* to instantiate a sorting function and sort a list of integers.
+- Use *MakeSort* to instantiate a sorting function and sort a list of integers (descending).
     <details>
         <summary>Hint</summary>
-        Function "Sort" accepts a list L and a function F. The function F accepts two sortable values (e.g., two integers) and returnes a boolean value.
+        Function "Sort" accepts a list L and a function F. The function F should accept two sortable values (e.g., two integers) and return a boolean value that dictates how those two values should be sorted.
     </detalis>
 
 #### Embedding
