@@ -878,7 +878,7 @@ fun {IsEmpty S} S==nil end
     -  \< fun {Get \<Dict\> \<Key\>}: \<Value\> \>
         -  Returnes the value corresponding to \<Key\>. If there is none, an exception is raised.
     -   \< fun {Domain \<Dict\>}: \<List \<Key\>\> \>
-        -   Returnes a list of the key in \<Dict\>.
+        -   Returnes a list of keys in \<Dict\>.
 
 #### List-based implementation
 - Dictionary can be implemented with a list representing the dictionary.
