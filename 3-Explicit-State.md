@@ -6,7 +6,7 @@
 - Explicit state is an extension to declarative programming: in addition to depending on its arguments, the component's result also depends on an internal parameter (state).
     - State gives the component a long-term memory, a sense of history.
 - Stateless and stateful programming are often called declarative and imperative programming, even though the latter terms are not as precise (but tradition has kept their use).
-- Declarative programming has three crucial advandatges over imperative programming:
+- Declarative programming has three crucial advantages over imperative programming:
     - It is easier to build abstractions in a declarative setting (since declarative operations are compositional).
     - Declarative programs are easier to test (since it is enough to test single calls). Testing stateful programs is harder because it involves testing sequences of calls (due to the internal history).
     - Reasoning with declarative programming is simpler then with imperative programming (algebraic reasoning is possible).
