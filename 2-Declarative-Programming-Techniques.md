@@ -806,7 +806,7 @@ end
 - Use *FoldR* to define the function "Some" that returnes *true* if there is at least one *true* in the list.
     <details>
         <summary>Hint</summary>
-        {Or true false} returnes true.
+        {Or true false} returns true.
     </detalis>
 
 #### Instantiation
