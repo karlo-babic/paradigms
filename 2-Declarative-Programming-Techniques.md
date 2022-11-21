@@ -804,6 +804,10 @@ end
 #### Exercise 4
 - Use *FoldR* to define the function "ProductList" that calculates the product of all elements in the list.
 - Use *FoldR* to define the function "Some" that returnes *true* if there is at least one *true* in the list.
+    <details>
+        <summary>Hint</summary>
+        {Or true false} returnes true.
+    </detalis>
 
 #### Instantiation
 - An example of instantiation is a function *MakeSort* that returnes a sorting function:
