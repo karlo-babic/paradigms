@@ -890,7 +890,7 @@ fun {IsEmpty S} S==nil end
 - In this implementation, the *Put* and *Get* operations take O(log n) time and space for a tree with n nodes.
 
 #### State-based implementation
-- We can do even better that the tree-based implementation by leaving the declarative model behind and using explicit state.
+- We can do even better than the tree-based implementation by leaving the declarative model behind and using explicit state.
     - Using state can reduce the execution time of *Put* and *Get* operations to amortized constant time.
 
 ---
