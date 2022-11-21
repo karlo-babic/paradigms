@@ -834,8 +834,6 @@ end
 
 ## 5. Abstract data types
 - A *data type* (or simply *type*) is a set of values together with a set of operations on these values.
-- The declarative model comes with a predefined set of types.
-    - In addition to these, the user is free to define new types.
 - A type is *abstract* if it is completely defined by its set of operations, regardless of the implementation.
     - It is possible to change the implementation of the type without changing its use.
 
