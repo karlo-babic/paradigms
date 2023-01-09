@@ -42,7 +42,7 @@ thread Ys = {Map Xs fun {$ X} X*X end} end
 
 ### Nondeterminism
 - An execution is nondeterministic if there is an execution state in which there is a choice of what to do next (i.e., which thread to reduce).
-    - If there are several threads, then in each execution state the system has to choose which therad to execute next.
+    - If there are several threads, then in each execution state the system has to choose which thread to execute next.
 - In a declarative concurrent model, the nondeterminism is not visible to the programmer. There are two reasons for this:
     - First, dataflow variables can be bound to only one value.
         - The nondeterminism affects only the exact moment when each binding takes place, it does not affect the fact that the binding does take place.
