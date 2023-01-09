@@ -47,7 +47,7 @@ thread Ys = {Map Xs fun {$ X} X*X end} end
     - First, dataflow variables can be bound to only one value.
         - The nondeterminism affects only the exact moment when each binding takes place, it does not affect the fact that the binding does take place.
     - Second, any operation that needs the value of a variable has no choice but to wait until the variable is bound.
-        - If we allow operations that could choose wheter to wait or not then the nondeterminism would become visible.
+        - If we allow operations that could choose whether to wait or not then the nondeterminism would become visible.
 - The last assignment (in the previous chapter) is an example of visible nondeterminism (random number generator that uses nondeterminism in concurrency).
 
 ### Failure
