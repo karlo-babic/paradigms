@@ -96,7 +96,7 @@ end
 ```
 - Info:
     - We catch the failure with the try statements, so that execution will not stop with an error.
-        - A try statement is needed for rach binding since each binding could fail.
+        - A try statement is needed for each binding since each binding could fail.
     - We do the bindings in local variables X1 and Y1, which are invisible to the rest of the program.
         - We make the bindings global only when we are sure that there is no failure.
 
