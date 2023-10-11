@@ -29,7 +29,7 @@ V = 9999 * 9999
 - Result: `9996000599960001`
 
 #### Exercise 1
-- Calculate 2^10 without typing 2\*2\*2... with ten twos.
+- Calculate 2^8 without eight multiplications (using only variables and multiplications).
     <details>
         <summary>Hint</summary>
         Use variables to store intermediate results.
