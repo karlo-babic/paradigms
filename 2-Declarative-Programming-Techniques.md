@@ -531,7 +531,7 @@ end
     - Queues have FIFO (First-In-First-Out) behavior.
 
 #### A naive queue
-- If a list L represents the queue content, then inserting X gives the new queue X|L and deleting X is done by calling {ButLast L X L1} (which binds X to the deleted element and returns the new queue in L1):
+- If a list L represents the queue content, then inserting X gives the new queue X|L. Deleting the last element (the oldest one) is done by calling {ButLast L X L1} (which binds X to the deleted element and returns the new queue in L1):
 ```
 proc {ButLast L ?X ?L1}
     case L
