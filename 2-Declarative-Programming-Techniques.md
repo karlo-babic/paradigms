@@ -442,7 +442,8 @@ end
     - You will need the *Reverse* function and a new iterative function that appends the reverse of a list to another list (which is not reversed).
     <details>
         <summary>Hint</summary>
-        [1 2] + [3 4] -> append( reverse([1 2]), [3 4] )<br>
+        Append [1 2] and [3 4] -> append( reverse([1 2]), [3 4] ) -> append( [2 1], [3 4] )<br>
+        Appending recursion:<br>
         [2 1], [3 4] -> 2 | [3 4]<br>
         [1], [2 3 4] -> 1 | [2 3 4]<br>
         [], [1 2 3 4]
