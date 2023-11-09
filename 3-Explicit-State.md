@@ -151,9 +151,9 @@ local Wrap Unwrap in
     fun {IsEmpty S} {Unwrap S}==nil end
 end
 ```
-- The stack is unwrapped when entering the ADT and wrapped when exiting.
-    - Outside the ADT, the stack is always wrapped.
-    - Once a stack is wrapped (with the *Wrap* function), it can be unwrapped only by the *Unwrap* function that is paired with the *Wrap* function.
+- The list is unwrapped when entering the ADT and wrapped when exiting.
+    - Outside the ADT, the list is always wrapped.
+    - Once a list is wrapped (with the *Wrap* function), it can be unwrapped only by the *Unwrap* function that is paired with the *Wrap* function.
 - Usage looks the same as in the previous example.
 - NewWrapper implementation:
 ```
