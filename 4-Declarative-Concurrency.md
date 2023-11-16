@@ -182,7 +182,7 @@ Zs = nil
 - The result is the same as with the sequential map function, the difference being that the concurrent version can obtain the output incrementally if the input is given incrementally.
 
 #### Assignment 1
-- Implement a concurrent Monte Carlo approximator of the number pi.
+- Implement a declarative concurrent Monte Carlo approximator of the number pi.
     - π ≈ 4 * (number of points in the circle / total number of points)
     - {MCPi NT NP} should return the approximation.
         - **NT**: The number of threads.
