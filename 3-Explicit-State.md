@@ -284,7 +284,7 @@ X = {S.pop}
         - *Init* - its initialization procedure,
         - *Max* - its maximum value.
     - {Init Seed} initializes the generator with integer seed *Seed*, that should be in the range 0, 1, ..., Max.
-    - X={Rand} generates a new random number X and updates the internal state. X is an integer in the range 0, 1, ..., Max-1 and has a uniform distribution (i.e, all integers have the same probability of appearing).
+    - {Rand} generates a new random number and updates the internal state. The generated number is an integer in the range 0, 1, ..., Max-1 and has a uniform distribution (i.e, all integers have the same probability of appearing).
 - In our implementation of the generator we will use the linear congruential generator algorithm. If x is the internal state and s is the seed, then the internal state updates as follows:
     - x<sub>0</sub> = s
     - x<sub>n</sub> = (ax<sub>n-1</sub> + b) mod m
