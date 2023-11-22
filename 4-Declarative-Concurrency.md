@@ -294,7 +294,7 @@ end
 ```
 
 ## 3. Demand-driven concurrency
-- Demand-driven evaluation, or **lazy evaluation**, in contrast to the usual execution strategy (eager evaluation or data-driven evaluation) executes a statement when its result is needed somewhere else in the program.
+- Demand-driven evaluation, or **lazy evaluation**, in contrast to the usual execution strategy (eager evaluation or data-driven evaluation), executes a statement when its result is needed somewhere else in the program.
     - Data-driven evaluation executes statements in order.
 - For example:
 ```
