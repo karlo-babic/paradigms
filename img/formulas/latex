@@ -1,0 +1,18 @@
+## 1.
+
+factorial
+\large n! = 1*2*...*(n-1)*n
+
+factorial_recursive
+\large 0! = 1
+\large n! = n*(n-1)! \quad if \quad n>0
+
+combination
+\large \binom{n}{r} = \frac{n!}{r!(n-r)!}
+
+
+## 2.
+
+factorial_recursive
+\large 0! = 1
+\large n! = n*(n-1)! \quad if \quad n>0
