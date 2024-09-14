@@ -62,8 +62,10 @@ end
 - Info:
     - The function body contains the **if expression** instruction.
     - **Recursion**: function is calling itself.
-    - Fact mathematical recursive definition: 
+    - Fact mathematical recursive definition:
+
 <p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/formulas/factorial_recursive.png"></p>
+
 - Call the function *{Fact 10}* inside of the Browse procedure to display the result: `{Browse {Fact 10}}`
 - Result: `3628800`
 - `{Browse {Fact 100}}`
