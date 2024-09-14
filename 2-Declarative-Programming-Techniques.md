@@ -244,8 +244,7 @@ end
     - It is important to avoid growing stack size whenever possible.
 - The factorial implementation below is an example of a recursive computation that is not iterative (its stack size is growing).
 - Factorial mathematical definition:
-    - <img src="https://render.githubusercontent.com/render/math?math=\large 0! = 1">
-    - <img src="https://render.githubusercontent.com/render/math?math=\large n! = n*(n-1)! \quad if \quad n>0">
+<p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/formulas/factorial_recursive.png"></p>
 - Implementation:
 ```
 fun {Fact N}
@@ -442,8 +441,7 @@ end
     - You will need the *Reverse* function and a new iterative function that appends the reverse of a list to another list (which is not reversed).
     <details>
         <summary>Hint</summary>
-        Append [1 2] and [3 4] -> append( reverse([1 2]), [3 4] ) -> append( [2 1], [3 4] )<br>
-        Appending recursion:<br>
+        [1 2] + [3 4] -> append( reverse([1 2]), [3 4] )<br>
         [2 1], [3 4] -> 2 | [3 4]<br>
         [1], [2 3 4] -> 1 | [2 3 4]<br>
         [], [1 2 3 4]
@@ -531,7 +529,7 @@ end
     - Queues have FIFO (First-In-First-Out) behavior.
 
 #### A naive queue
-- If a list L represents the queue content, then inserting X gives the new queue X|L. Deleting the last element (the oldest one) is done by calling {ButLast L X L1} (which binds X to the deleted element and returns the new queue in L1):
+- If a list L represents the queue content, then inserting X gives the new queue X|L and deleting X is done by calling {ButLast L X L1} (which binds X to the deleted element and returns the new queue in L1):
 ```
 proc {ButLast L ?X ?L1}
     case L
