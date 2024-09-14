@@ -1,3 +1,4 @@
 name: Paradigms
 title: null
 markdown: GFM
+math_engine: katex
