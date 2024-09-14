@@ -244,7 +244,9 @@ end
     - It is important to avoid growing stack size whenever possible.
 - The factorial implementation below is an example of a recursive computation that is not iterative (its stack size is growing).
 - Factorial mathematical definition:
+
 <p align="center"><img src="https://raw.githubusercontent.com/karlo-babic/paradigms/main/img/formulas/factorial_recursive.png"></p>
+
 - Implementation:
 ```
 fun {Fact N}
