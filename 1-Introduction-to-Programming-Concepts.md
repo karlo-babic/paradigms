@@ -1,3 +1,12 @@
+---
+layout: none
+---
+
+<div markdown="1">
+
+{% include_relative html.html %}
+
+
 # 1. Introduction to Programming Concepts
 
 >"There is no royal road to geometry."  
@@ -617,3 +626,6 @@ end
   <a href="Contents.html" style="font-size:64px; text-decoration:none"> ^ </a>
   <a href="2-Declarative-Programming-Techniques.html" style="font-size:64px; text-decoration:none"> > </a>
 </b></div>
+
+
+</div>
