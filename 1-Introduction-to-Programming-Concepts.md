@@ -45,7 +45,7 @@ V = 9999 * 9999
 ## 3. Functions
 
 ### Factorial
-- Factorial definition: $$\large n! = 1*2*...*(n-1)*n$$
+- Factorial definition: $\large n! = 1*2*...*(n-1)*n$
 - Factorial of 10: `{Browse 1*2*3*4*5*6*7*8*9*10}`
 - Result: `3628800`
 - Define a function:
