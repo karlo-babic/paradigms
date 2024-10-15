@@ -19,6 +19,7 @@ After the software setup, continue with [1. Introduction to Programming Concepts
 ## Literature
 - [**Concepts, Techniques, and Models of Computer Programming (2004)**](https://www.goodreads.com/book/show/772585.Concepts_Techniques_and_Models_of_Computer_Programming)
     - [**TLDR**](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf) *"Programming Paradigms for Dummies: What Every Programmer Should Know"* by the same author
+- [Tutorial of Oz](http://mozart2.org/mozart-v1/doc-1.4.0/tutorial/index.html)
 - [Programming Languages: Principles and Paradigms (2010)](https://www.goodreads.com/book/show/7322948-programming-languages)
     - [Contents](http://www.springer.com/cda/content/document/cda_downloaddocument/9781848829138-t1.pdf)
 - [Code Complete: A Practical Handbook of Software Construction (1993)](https://www.goodreads.com/book/show/4845.Code_Complete)
