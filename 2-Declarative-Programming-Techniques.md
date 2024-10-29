@@ -531,8 +531,10 @@ end
     - Queues have FIFO (First-In-First-Out) behavior.
 
 #### A naive queue
-- If a list L represents the queue content, then inserting X gives the new queue X|L and deleting X is done by calling {ButLast L X L1} (which binds X to the deleted element and returns the new queue in L1):
+- If a list L represents the queue content, then inserting X gives the new queue X|L. Deleting Y is done by calling {ButLast L Y L1} (which binds Y to the deleted element and returns the new queue in L1):
 ```
+declare L X L1
+
 proc {ButLast L ?X ?L1}
     case L
     of [Y] then X=Y L1=nil
@@ -541,6 +543,11 @@ proc {ButLast L ?X ?L1}
         {ButLast L2 X L3}
     end
 end
+
+L = [1 2 3 4]
+{ButLast L X L1}
+{Browse L1}
+{Browse X}
 ```
 - ButLast is slow: it takes time proportional to the number of elements in the queue.
 
