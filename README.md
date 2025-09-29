@@ -1,3 +1,5 @@
+New version: [karlo-babic.github.io/paradigms-py](https://karlo-babic.github.io/paradigms-py).
+
 # Programming Paradigms and Languages
 
 >"A programming language is like a natural, human language in that it favors certain metaphors, images, and ways of thinking."  
